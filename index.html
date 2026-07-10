@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1">
+
+<title>Jannersten Scanner</title>
+
+<link
+    rel="stylesheet"
+    href="style.css">
+
+</head>
+
+<body>
+
+<div id="app">
+
+    <video
+        id="camera"
+        autoplay
+        playsinline
+        muted>
+    </video>
+
+    <canvas
+        id="overlay">
+    </canvas>
+
+    <div id="status">
+
+        Kamera hazırlanıyor...
+
+    </div>
+
+    <div id="result">
+
+        Kart bekleniyor...
+
+    </div>
+
+</div>
+
+
+<script src="lib/opencv.js"></script>
+
+<script src="js/utils.js"></script>
+
+<script src="js/camera.js"></script>
+
+<script src="js/cardDetector.js"></script>
+
+<script src="js/perspective.js"></script>
+
+<script src="js/barcodeDecoder.js"></script>
+
+<script src="js/cardDatabase.js"></script>
+
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
