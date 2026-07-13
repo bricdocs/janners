@@ -1,6 +1,6 @@
 /*=====================================================*
  cardDetector.js
- Version 3.0
+ Version 4.0
 =====================================================*/
 
 const CardDetector = {
@@ -22,7 +22,7 @@ function detectCard(src) {
     cv.GaussianBlur(
         gray,
         blur,
-        new cv.Size(5,5),
+        new cv.Size(5, 5),
         0
     );
 
@@ -34,14 +34,26 @@ function detectCard(src) {
     );
 
     //--------------------------------------------------
-    // Dilate + Close
+    // Dilate
     //--------------------------------------------------
 
-    const kernel = cv.Mat.ones(3,3,cv.CV_8U);
+    const kernel = cv.Mat.ones(
+        3,
+        3,
+        cv.CV_8U
+    );
 
     const work = new cv.Mat();
 
-    cv.dilate(edge, work, kernel);
+    cv.dilate(
+        edge,
+        work,
+        kernel
+    );
+
+    //--------------------------------------------------
+    // Morph Close
+    //--------------------------------------------------
 
     cv.morphologyEx(
         work,
@@ -65,22 +77,79 @@ function detectCard(src) {
         cv.CHAIN_APPROX_SIMPLE
     );
 
-    let bestContour = null;
+    let best = null;
     let bestArea = 0;
 
-    for(let i=0;i<contours.size();i++){
+    for (let i = 0; i < contours.size(); i++) {
 
         const cnt = contours.get(i);
 
         const area = cv.contourArea(cnt);
 
-        if(area > bestArea){
+        if (area < 5000) {
+            cnt.delete();
+            continue;
+        }
 
-            if(bestContour)
-                bestContour.delete();
+        const peri = cv.arcLength(
+            cnt,
+            true
+        );
 
-            bestContour = cnt.clone();
+        //--------------------------------------------------
+        // Farklı epsilon dene
+        //--------------------------------------------------
+
+        const epsList = [
+            0.010,
+            0.015,
+            0.020,
+            0.025,
+            0.030
+        ];
+
+        let found = null;
+
+        for (let e of epsList) {
+
+            const approx = new cv.Mat();
+
+            cv.approxPolyDP(
+                cnt,
+                approx,
+                peri * e,
+                true
+            );
+
+            if (
+                approx.rows == 4 &&
+                cv.isContourConvex(approx)
+            ) {
+
+                found = approx;
+                break;
+
+            }
+
+            approx.delete();
+
+        }
+
+        if (
+            found &&
+            area > bestArea
+        ) {
+
+            if (best)
+                best.delete();
+
+            best = found;
             bestArea = area;
+
+        } else {
+
+            if (found)
+                found.delete();
 
         }
 
@@ -88,40 +157,12 @@ function detectCard(src) {
 
     }
 
-    let quad = null;
-
-    if(bestContour && bestArea > 5000){
-
-        console.log(
-            "Largest contour area =",
-            Math.round(bestArea)
-        );
-
-        //--------------------------------------------------
-        // En küçük döndürülmüş dikdörtgen
-        //--------------------------------------------------
-
-        const rect = cv.minAreaRect(bestContour);
-
-        const pts = cv.RotatedRect.points(rect);
-
-        quad = new cv.Mat(4,1,cv.CV_32SC2);
-
-        const p = quad.data32S;
-
-        for(let i=0;i<4;i++){
-
-            p[i*2]     = Math.round(pts[i].x);
-            p[i*2 + 1] = Math.round(pts[i].y);
-
-        }
-
-    }
-    else{
-
-        console.log("Kart bulunamadı.");
-
-    }
+    console.log(
+        "Largest contour area =",
+        Math.round(bestArea),
+        "Found =",
+        best != null
+    );
 
     gray.delete();
     blur.delete();
@@ -131,12 +172,9 @@ function detectCard(src) {
     contours.delete();
     hierarchy.delete();
 
-    if(bestContour)
-        bestContour.delete();
+    CardDetector.lastQuad = best;
 
-    CardDetector.lastQuad = quad;
-
-    return quad;
+    return best;
 
 }
 
@@ -144,9 +182,9 @@ function detectCard(src) {
 // Kart Çiz
 //--------------------------------------------------
 
-function drawCard(canvas, quad){
+function drawCard(canvas, quad) {
 
-    if(!quad)
+    if (!quad)
         return;
 
     const p = quad.data32S;
@@ -160,13 +198,51 @@ function drawCard(canvas, quad){
 
     ctx.beginPath();
 
-    ctx.moveTo(p[0],p[1]);
-    ctx.lineTo(p[2],p[3]);
-    ctx.lineTo(p[4],p[5]);
-    ctx.lineTo(p[6],p[7]);
+    ctx.moveTo(
+        p[0],
+        p[1]
+    );
+
+    ctx.lineTo(
+        p[2],
+        p[3]
+    );
+
+    ctx.lineTo(
+        p[4],
+        p[5]
+    );
+
+    ctx.lineTo(
+        p[6],
+        p[7]
+    );
+
     ctx.closePath();
 
     ctx.stroke();
+
+    //--------------------------------------------------
+    // Köşeleri göster
+    //--------------------------------------------------
+
+    ctx.fillStyle = "#ff0000";
+
+    for (let i = 0; i < 4; i++) {
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p[i * 2],
+            p[i * 2 + 1],
+            5,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+    }
 
     ctx.restore();
 
@@ -174,10 +250,10 @@ function drawCard(canvas, quad){
 
 //--------------------------------------------------
 
-function getDetectedCard(){
+function getDetectedCard() {
 
     return CardDetector.lastQuad;
 
 }
 
-console.log("cardDetector.js v3.0 (minAreaRect) hazır.");
+console.log("cardDetector.js v4.0 hazır.");
