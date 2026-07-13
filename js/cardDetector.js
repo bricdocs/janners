@@ -297,3 +297,58 @@ function orderPoints(quad) {
     return [tl, tr, br, bl];
 
 }
+
+//--------------------------------------------------
+// Perspective Transform
+//--------------------------------------------------
+
+function warpCard(src, quad) {
+
+    const pts = orderPoints(quad);
+
+    const W = 200;
+    const H = 300;
+
+    const srcPts = cv.matFromArray(
+        4,
+        1,
+        cv.CV_32FC2,
+        [
+            pts[0].x, pts[0].y,
+            pts[1].x, pts[1].y,
+            pts[2].x, pts[2].y,
+            pts[3].x, pts[3].y
+        ]
+    );
+
+    const dstPts = cv.matFromArray(
+        4,
+        1,
+        cv.CV_32FC2,
+        [
+            0,0,
+            W-1,0,
+            W-1,H-1,
+            0,H-1
+        ]
+    );
+
+    const M = cv.getPerspectiveTransform(srcPts, dstPts);
+
+    const warped = new cv.Mat();
+
+    cv.warpPerspective(
+        src,
+        warped,
+        M,
+        new cv.Size(W, H)
+    );
+
+    cv.imshow("warpCanvas", warped);
+
+    srcPts.delete();
+    dstPts.delete();
+    M.delete();
+    warped.delete();
+
+}
