@@ -1,32 +1,21 @@
 /*=========================================*
- templateMatcher.js
- Version 1.0
-*=========================================*/
+ * templateMatcher.js
+ * Version 1.0
+ *=========================================*/
 
-const TemplateMatcher = {
-
-    rankTemplates: [],
-    suitTemplates: []
-
+const Templates = {
+    ranks: [],
+    suits: []
 };
 
-//----------------------------------
+async function loadTemplates() {
 
-function loadTemplates()
-{
-    console.log("Template matcher hazır.");
+    console.log("Templates yükleniyor...");
+
+    // Şimdilik boş.
+    // Bir sonraki adımda resimleri burada yükleyeceğiz.
+
+    console.log("Templates hazır.");
 }
 
-//----------------------------------
-
-function matchRank(rankImage)
-{
-    return "?";
-}
-
-//----------------------------------
-
-function matchSuit(suitImage)
-{
-    return "?";
-}
+console.log("templateMatcher.js hazır.");
