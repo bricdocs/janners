@@ -11,62 +11,45 @@ window.onload = async function () {
     function loop() {
 
         if (!cameraReady()) {
-
             requestAnimationFrame(loop);
             return;
-
         }
 
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
 
-        // Kamera görüntüsü
-        ctx.drawImage(
-            video,
-            0,
-            0,
-            canvas.width,
-            canvas.height
+        // Kamerayı çiz
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        //----------------------------------
+        // OpenCV
+        //----------------------------------
+
+        let src = cv.imread(canvas);
+
+        let gray = new cv.Mat();
+        let edge = new cv.Mat();
+
+        cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
+
+        cv.Canny(
+            gray,
+            edge,
+            60,
+            150
         );
 
-        //----------------------------------
-        // Kart Algılama
-        //----------------------------------
-
-        const src = cv.imread(canvas);
-
-        const quad = detectCard(src);
+        // SADECE Canny görüntüsünü göster
+        cv.imshow(canvas, edge);
 
         src.delete();
-
-        //----------------------------------
-        // Kamerayı tekrar çiz
-        //----------------------------------
-
-        ctx.drawImage(
-            video,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
-
-        //----------------------------------
-        // Kart bulunduysa çiz
-        //----------------------------------
-
-        if (quad) {
-
-            drawCard(canvas, quad);
-
-        }
+        gray.delete();
+        edge.delete();
 
         requestAnimationFrame(loop);
-
     }
 
     loop();
 
-    console.log("Sistem hazır.");
-
+    console.log("CANNY TEST MODE");
 };
