@@ -1,4 +1,4 @@
-/*=====================================================
+/*=====================================================*
  cardDetector.js
  Debug Version
 =====================================================*/
@@ -17,7 +17,11 @@ function detectCard(src) {
     const blur = new cv.Mat();
     const edge = new cv.Mat();
 
-    cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
+    cv.cvtColor(
+        src,
+        gray,
+        cv.COLOR_RGBA2GRAY
+    );
 
     cv.GaussianBlur(
         gray,
@@ -67,22 +71,9 @@ function detectCard(src) {
             true
         );
 
-        //-------------------------------------------------
-        // DEBUG
-        //-------------------------------------------------
-
-        console.log(
-            "Contour",
-            i,
-            "Area =",
-            Math.round(area),
-            "Vertices =",
-            approx.rows
-        );
-
-        //-------------------------------------------------
-        // Kart seçimi
-        //-------------------------------------------------
+        //--------------------------------------
+        // En büyük contour seç
+        //--------------------------------------
 
         if (
             area > bestArea &&
@@ -104,13 +95,14 @@ function detectCard(src) {
         }
 
         cnt.delete();
-
     }
 
+    //--------------------------------------
+    // SADECE 1 SATIR DEBUG
+    //--------------------------------------
+
     console.log(
-        "Contours =",
-        contours.size(),
-        "Best Area =",
+        "Largest contour area =",
         Math.round(bestArea),
         "Found =",
         best != null
@@ -140,6 +132,10 @@ function drawCard(canvas, quad) {
 
     const p = quad.data32S;
 
+    // Güvenlik
+    if (p.length < 8)
+        return;
+
     ctx.save();
 
     ctx.strokeStyle = "#00ff00";
@@ -151,12 +147,11 @@ function drawCard(canvas, quad) {
     ctx.lineTo(p[2], p[3]);
     ctx.lineTo(p[4], p[5]);
     ctx.lineTo(p[6], p[7]);
-    ctx.closePath();
 
+    ctx.closePath();
     ctx.stroke();
 
     ctx.restore();
-
 }
 
 //------------------------------------------
