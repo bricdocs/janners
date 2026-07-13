@@ -353,3 +353,24 @@ function warpCard(src, quad) {
     return warped;
 
 }
+
+//--------------------------------------------------
+// Sol üst köşeyi kes
+//--------------------------------------------------
+
+function detectCorner(card) {
+
+    const roi = card.roi(
+        new cv.Rect(
+            0,
+            0,
+            70,
+            125
+        )
+    );
+
+    cv.imshow("cornerCanvas", roi);
+
+    roi.delete();
+
+}
