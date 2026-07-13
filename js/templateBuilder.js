@@ -3,8 +3,11 @@
  Version 1.0
 =========================================*/
 
-window.onload = function ()
+window.onload = async function ()
 {
+    await waitForOpenCV();
+
+    console.log("OpenCV hazır.");
     console.log("Template Builder hazır.");
 
     const imageFile = document.getElementById("imageFile");
