@@ -1,15 +1,15 @@
 /*=====================================================*
  cardDetector.js
- Debug Version
+ Version 2.0
 =====================================================*/
 
 const CardDetector = {
     lastQuad: null
 };
 
-//------------------------------------------
-// Kartı Bul
-//------------------------------------------
+//--------------------------------------------------
+// Kart Bul
+//--------------------------------------------------
 
 function detectCard(src) {
 
@@ -26,7 +26,7 @@ function detectCard(src) {
     cv.GaussianBlur(
         gray,
         blur,
-        new cv.Size(5, 5),
+        new cv.Size(5,5),
         0
     );
 
@@ -37,11 +37,44 @@ function detectCard(src) {
         150
     );
 
+    //--------------------------------------------------
+    // Dilate
+    //--------------------------------------------------
+
+    const kernel = cv.Mat.ones(
+        3,
+        3,
+        cv.CV_8U
+    );
+
+    const work = new cv.Mat();
+
+    cv.dilate(
+        edge,
+        work,
+        kernel
+    );
+
+    //--------------------------------------------------
+    // Close
+    //--------------------------------------------------
+
+    cv.morphologyEx(
+        work,
+        work,
+        cv.MORPH_CLOSE,
+        kernel
+    );
+
+    //--------------------------------------------------
+    // Contours
+    //--------------------------------------------------
+
     const contours = new cv.MatVector();
     const hierarchy = new cv.Mat();
 
     cv.findContours(
-        edge,
+        work,
         contours,
         hierarchy,
         cv.RETR_EXTERNAL,
@@ -51,11 +84,18 @@ function detectCard(src) {
     let best = null;
     let bestArea = 0;
 
-    for (let i = 0; i < contours.size(); i++) {
+    for(let i=0;i<contours.size();i++){
 
         const cnt = contours.get(i);
 
         const area = cv.contourArea(cnt);
+
+        if(area < 5000){
+
+            cnt.delete();
+            continue;
+
+        }
 
         const peri = cv.arcLength(
             cnt,
@@ -71,46 +111,39 @@ function detectCard(src) {
             true
         );
 
-        //--------------------------------------
-        // En büyük contour seç
-        //--------------------------------------
+        if(
+            approx.rows == 4 &&
+            area > bestArea
+        ){
 
-        if (
-            area > bestArea &&
-            approx.rows >= 4 &&
-            approx.rows <= 8
-        ) {
-
-            if (best != null) {
+            if(best)
                 best.delete();
-            }
 
             best = approx;
             bestArea = area;
 
-        } else {
+        }else{
 
             approx.delete();
 
         }
 
         cnt.delete();
+
     }
 
-    //--------------------------------------
-    // SADECE 1 SATIR DEBUG
-    //--------------------------------------
-
     console.log(
-        "Largest contour area =",
+        "Largest contour =",
         Math.round(bestArea),
-        "Found =",
-        best != null
+        "Vertices =",
+        best ? best.rows : 0
     );
 
     gray.delete();
     blur.delete();
     edge.delete();
+    work.delete();
+    kernel.delete();
     contours.delete();
     hierarchy.delete();
 
@@ -119,47 +152,45 @@ function detectCard(src) {
     return best;
 }
 
-//------------------------------------------
-// Kartı Çiz
-//------------------------------------------
+//--------------------------------------------------
+// Kart Çiz
+//--------------------------------------------------
 
-function drawCard(canvas, quad) {
+function drawCard(canvas, quad){
 
-    if (quad == null)
+    if(!quad)
         return;
 
     const ctx = canvas.getContext("2d");
 
     const p = quad.data32S;
 
-    // Güvenlik
-    if (p.length < 8)
-        return;
-
     ctx.save();
 
-    ctx.strokeStyle = "#00ff00";
-    ctx.lineWidth = 5;
+    ctx.strokeStyle="#00ff00";
+    ctx.lineWidth=4;
 
     ctx.beginPath();
 
-    ctx.moveTo(p[0], p[1]);
-    ctx.lineTo(p[2], p[3]);
-    ctx.lineTo(p[4], p[5]);
-    ctx.lineTo(p[6], p[7]);
+    ctx.moveTo(p[0],p[1]);
+    ctx.lineTo(p[2],p[3]);
+    ctx.lineTo(p[4],p[5]);
+    ctx.lineTo(p[6],p[7]);
 
     ctx.closePath();
+
     ctx.stroke();
 
     ctx.restore();
+
 }
 
-//------------------------------------------
-// Son Kart
-//------------------------------------------
+//--------------------------------------------------
 
-function getDetectedCard() {
+function getDetectedCard(){
+
     return CardDetector.lastQuad;
+
 }
 
-console.log("cardDetector.js DEBUG hazır.");
+console.log("cardDetector.js v2 hazır.");
