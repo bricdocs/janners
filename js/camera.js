@@ -10,6 +10,12 @@ async function startCamera() {
 
     Camera.video = document.getElementById("video");
 
+    if (!Camera.video) {
+
+        throw new Error("index.html içinde id='video' bulunamadı.");
+
+    }
+
     try {
 
         Camera.stream = await navigator.mediaDevices.getUserMedia({
@@ -36,6 +42,16 @@ async function startCamera() {
 
         Camera.video.srcObject = Camera.stream;
 
+        await new Promise(resolve => {
+
+            Camera.video.onloadedmetadata = () => {
+
+                resolve();
+
+            };
+
+        });
+
         await Camera.video.play();
 
         Camera.ready = true;
@@ -46,9 +62,12 @@ async function startCamera() {
             Camera.video.videoHeight
         );
 
-    } catch (err) {
+    }
+    catch (err) {
 
-        console.error(err);
+        console.error("Camera Error:", err);
+
+        throw err;
 
     }
 
@@ -63,5 +82,21 @@ function cameraReady() {
 function getVideo() {
 
     return Camera.video;
+
+}
+
+function stopCamera() {
+
+    if (Camera.stream) {
+
+        Camera.stream.getTracks().forEach(track => {
+
+            track.stop();
+
+        });
+
+    }
+
+    Camera.ready = false;
 
 }
