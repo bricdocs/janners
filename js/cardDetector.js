@@ -349,6 +349,7 @@ function warpCard(src, quad) {
     srcPts.delete();
     dstPts.delete();
     M.delete();
-    warped.delete();
+ 
+    return warped;
 
 }
