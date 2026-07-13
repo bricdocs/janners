@@ -91,12 +91,18 @@ const suitRect = new cv.Rect(
 const suit = binary.roi(suitRect);
 
 cv.imshow("suitCanvas", suit);
-    
+
+// Artık binary silinmeyecek.
+// rank ve suit de silinmeyecek.
+// Bunları çağıran fonksiyon kullanacak.
+
 roi.delete();
 gray.delete();
 
-rank.delete();
-suit.delete();
-
-return binary;
+return {
+    binary,
+    rank,
+    suit
+};
+    
 }
