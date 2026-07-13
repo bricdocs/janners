@@ -34,14 +34,30 @@ const h = Math.round(card.rows * 0.24);
     cv.cvtColor(roi, gray, cv.COLOR_RGBA2GRAY);
 
     // 5- Binary
-    const binary = new cv.Mat();
-    cv.threshold(
-        gray,
-        binary,
-        0,
-        255,
-        cv.THRESH_BINARY + cv.THRESH_OTSU
-    );
+const binary = new cv.Mat();
+
+cv.threshold(
+    gray,
+    binary,
+    0,
+    255,
+    cv.THRESH_BINARY + cv.THRESH_OTSU
+);
+
+const kernel = cv.Mat.ones(
+    3,
+    3,
+    cv.CV_8U
+);
+
+cv.morphologyEx(
+    binary,
+    binary,
+    cv.MORPH_CLOSE,
+    kernel
+);
+
+kernel.delete();
 
     // 6- Sonucu göster
     cv.imshow("binaryCanvas", binary);
