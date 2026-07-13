@@ -1,3 +1,4 @@
+throw new Error("CARDDETECTOR TEST");
 /*=====================================================
  cardDetector.js
  Debug Version
