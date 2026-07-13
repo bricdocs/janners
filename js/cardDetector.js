@@ -1,8 +1,20 @@
+/*
+=====================================================
+ cardDetector.js
+ Version 1.0
+ Kart Algılama
+=====================================================
+*/
+
 const CardDetector = {
 
     lastQuad: null
 
 };
+
+//------------------------------------------
+// Kartı Bul
+//------------------------------------------
 
 function detectCard(src) {
 
@@ -10,12 +22,16 @@ function detectCard(src) {
     const blur = new cv.Mat();
     const edge = new cv.Mat();
 
-    cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
+    cv.cvtColor(
+        src,
+        gray,
+        cv.COLOR_RGBA2GRAY
+    );
 
     cv.GaussianBlur(
         gray,
         blur,
-        new cv.Size(5, 5),
+        new cv.Size(5,5),
         0
     );
 
@@ -40,51 +56,66 @@ function detectCard(src) {
     let best = null;
     let bestArea = 0;
 
-    for (let i = 0; i < contours.size(); i++) {
+    for(let i=0;i<contours.size();i++){
 
-        const c = contours.get(i);
+        const cnt = contours.get(i);
 
-        const area = cv.contourArea(c);
+        const area = cv.contourArea(cnt);
 
-        if (area < 30000) {
+        if(area < 10000){
 
-            c.delete();
+            cnt.delete();
             continue;
 
         }
 
-        const peri = cv.arcLength(c, true);
+        const peri = cv.arcLength(
+            cnt,
+            true
+        );
 
         const approx = new cv.Mat();
 
         cv.approxPolyDP(
-            c,
+            cnt,
             approx,
             peri * 0.02,
             true
         );
 
-        if (
-            approx.rows === 4 &&
+        if(
+            approx.rows == 4 &&
             area > bestArea
-        ) {
+        ){
 
-            if (best)
+            if(best != null){
+
                 best.delete();
+
+            }
 
             best = approx;
 
             bestArea = area;
 
-        } else {
+        }else{
 
             approx.delete();
 
         }
 
-        c.delete();
+        cnt.delete();
 
     }
+
+    console.log(
+        "Contours =",
+        contours.size(),
+        "Best Area =",
+        bestArea,
+        "Found =",
+        best != null
+    );
 
     gray.delete();
     blur.delete();
@@ -98,30 +129,65 @@ function detectCard(src) {
 
 }
 
-function drawCard(canvas, quad) {
+//------------------------------------------
+// Kartı Çiz
+//------------------------------------------
 
-    if (!quad)
+function drawCard(canvas, quad){
+
+    if(quad == null)
         return;
 
     const ctx = canvas.getContext("2d");
 
+    const p = quad.data32S;
+
+    ctx.save();
+
     ctx.strokeStyle = "#00ff00";
-    ctx.lineWidth = 4;
+
+    ctx.lineWidth = 5;
 
     ctx.beginPath();
 
-    const d = quad.data32S;
+    ctx.moveTo(
+        p[0],
+        p[1]
+    );
 
-    ctx.moveTo(d[0], d[1]);
+    ctx.lineTo(
+        p[2],
+        p[3]
+    );
 
-    ctx.lineTo(d[2], d[3]);
+    ctx.lineTo(
+        p[4],
+        p[5]
+    );
 
-    ctx.lineTo(d[4], d[5]);
-
-    ctx.lineTo(d[6], d[7]);
+    ctx.lineTo(
+        p[6],
+        p[7]
+    );
 
     ctx.closePath();
 
     ctx.stroke();
 
+    ctx.restore();
+
 }
+
+//------------------------------------------
+// Son Kart
+//------------------------------------------
+
+function getDetectedCard(){
+
+    return CardDetector.lastQuad;
+
+}
+
+console.log(
+    "cardDetector.js hazır."
+);
