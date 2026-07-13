@@ -5,23 +5,34 @@ Version 1.0
 
 function preprocessCorner(card)
 {
-    // Köşe bölgesi
+    const x = 5;
+    const y = 5;
+    const w = 65;
+    const h = 120;
+
+    // 1- Önce ROI kutusunu çiz
+    cv.rectangle(
+        card,
+        new cv.Point(x, y),
+        new cv.Point(x + w, y + h),
+        new cv.Scalar(0, 255, 0, 255),
+        2
+    );
+
+    // 2- Sonra warpCanvas'ı güncelle
+    cv.imshow("warpCanvas", card);
+
+    // 3- Daha sonra ROI'yi al
     const roi = card.roi(
-        new cv.Rect(5, 5, 65, 120)
+        new cv.Rect(x, y, w, h)
     );
 
-    // Gri görüntü
+    // 4- Gray
     const gray = new cv.Mat();
+    cv.cvtColor(roi, gray, cv.COLOR_RGBA2GRAY);
 
-    cv.cvtColor(
-        roi,
-        gray,
-        cv.COLOR_RGBA2GRAY
-    );
-
-    // Siyah-Beyaz (Otsu)
+    // 5- Binary
     const binary = new cv.Mat();
-
     cv.threshold(
         gray,
         binary,
@@ -30,15 +41,11 @@ function preprocessCorner(card)
         cv.THRESH_BINARY + cv.THRESH_OTSU
     );
 
-    // Sonucu göster
+    // 6- Sonucu göster
     cv.imshow("binaryCanvas", binary);
 
-    // Belleği temizle
     roi.delete();
     gray.delete();
 
-    // Binary görüntüyü geri döndür
     return binary;
 }
-
-console.log("cardRecognizer.js hazır.");
