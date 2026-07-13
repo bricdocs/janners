@@ -1,31 +1,52 @@
 window.onload = async function () {
 
-    try {
+    await waitForOpenCV();
 
-        await waitForOpenCV();
+    await startCamera();
 
-        await startCamera();
+    const video = getVideo();
 
-        // Kameranın ilk görüntüyü oluşturmasını bekle
-        await new Promise(resolve => setTimeout(resolve, 500));
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
 
-        console.log("Sistem hazır.");
+    function loop() {
 
-        const src = captureFrame(getVideo());
+        if (!cameraReady()) {
 
-        const gray = preprocess(src);
+            requestAnimationFrame(loop);
+            return;
 
-        console.log("Frame :", src.cols, src.rows);
-        console.log("Gray  :", gray.cols, gray.rows);
+        }
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        ctx.drawImage(
+            video,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        const src = cv.imread(canvas);
+
+        const quad = detectCard(src);
+
+        if (quad) {
+
+            drawCard(canvas, quad);
+
+        }
 
         src.delete();
-        gray.delete();
+
+        requestAnimationFrame(loop);
 
     }
-    catch (err) {
 
-        console.error("APP ERROR:", err);
+    loop();
 
-    }
+    console.log("Sistem hazır.");
 
 };
