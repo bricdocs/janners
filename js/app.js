@@ -1,3 +1,4 @@
+```javascript
 window.onload = async function () {
 
     await waitForOpenCV();
@@ -11,59 +12,63 @@ window.onload = async function () {
     function loop() {
 
         if (!cameraReady()) {
+
             requestAnimationFrame(loop);
             return;
+
         }
 
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
 
-        // Kamerayı çiz
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        //----------------------------------
-        // OpenCV
-        //----------------------------------
-
-        let src = cv.imread(canvas);
-
-        let gray = new cv.Mat();
-        let blur = new cv.Mat();
-        let edge = new cv.Mat();
-
-        cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
-
-        cv.GaussianBlur(
-            gray,
-            blur,
-            new cv.Size(5,5),
-            0
-        );
-
-        cv.Canny(
-            blur,
-            edge,
-            60,
-            150
+        // Kamera görüntüsü
+        ctx.drawImage(
+            video,
+            0,
+            0,
+            canvas.width,
+            canvas.height
         );
 
         //----------------------------------
-        // EKRANA CANNY BAS
+        // Kart Algılama
         //----------------------------------
 
-        cv.imshow(canvas, edge);
+        const src = cv.imread(canvas);
 
-        //----------------------------------
+        const quad = detectCard(src);
 
         src.delete();
-        gray.delete();
-        blur.delete();
-        edge.delete();
+
+        //----------------------------------
+        // Kamerayı tekrar çiz
+        //----------------------------------
+
+        ctx.drawImage(
+            video,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        //----------------------------------
+        // Kart bulunduysa çiz
+        //----------------------------------
+
+        if (quad) {
+
+            drawCard(canvas, quad);
+
+        }
 
         requestAnimationFrame(loop);
+
     }
 
     loop();
 
-    console.log("DEBUG MODE");
+    console.log("Sistem hazır.");
+
 };
+```
