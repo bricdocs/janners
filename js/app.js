@@ -42,7 +42,15 @@ if (quad) {
 
     drawCard(canvas, quad);
 
-    warpCard(src, quad);
+    const warped = warpCard(src, quad);
+
+if (warped) {
+
+    detectCorner(warped);
+
+    warped.delete();
+
+}
 
 }
 
