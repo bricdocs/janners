@@ -90,7 +90,7 @@ function detectCard(src) {
 
         const area = cv.contourArea(cnt);
 
-        if(area < 5000){
+        if(area < 100){
 
             cnt.delete();
             continue;
@@ -110,7 +110,12 @@ function detectCard(src) {
             peri * 0.02,
             true
         );
-
+console.log(
+    "Area:",
+    Math.round(area),
+    "Vertices:",
+    approx.rows
+);
         if(
             approx.rows == 4 &&
             area > bestArea
