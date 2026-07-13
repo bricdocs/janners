@@ -257,3 +257,43 @@ function getDetectedCard() {
 }
 
 console.log("cardDetector.js v4.0 hazır.");
+
+//--------------------------------------------------
+// Köşeleri sırala
+// TL, TR, BR, BL
+//--------------------------------------------------
+
+function orderPoints(quad) {
+
+    const p = quad.data32S;
+
+    const pts = [];
+
+    for (let i = 0; i < 4; i++) {
+
+        pts.push({
+            x: p[i * 2],
+            y: p[i * 2 + 1]
+        });
+
+    }
+
+    // Sol üst = x+y en küçük
+    // Sağ alt = x+y en büyük
+
+    const sum = pts.map(pt => pt.x + pt.y);
+
+    const tl = pts[sum.indexOf(Math.min(...sum))];
+    const br = pts[sum.indexOf(Math.max(...sum))];
+
+    // Sağ üst = x-y en büyük
+    // Sol alt = x-y en küçük
+
+    const diff = pts.map(pt => pt.x - pt.y);
+
+    const tr = pts[diff.indexOf(Math.max(...diff))];
+    const bl = pts[diff.indexOf(Math.min(...diff))];
+
+    return [tl, tr, br, bl];
+
+}
