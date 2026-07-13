@@ -1,16 +1,14 @@
 const Camera = {
 
     video: null,
-
     stream: null,
-
     ready: false
 
 };
 
 async function startCamera() {
 
-    Camera.video = document.getElementById("camera");
+    Camera.video = document.getElementById("video");
 
     try {
 
@@ -19,21 +17,15 @@ async function startCamera() {
             video: {
 
                 facingMode: {
-
                     ideal: "environment"
-
                 },
 
                 width: {
-
                     ideal: 1920
-
                 },
 
                 height: {
-
                     ideal: 1080
-
                 }
 
             },
@@ -48,9 +40,6 @@ async function startCamera() {
 
         Camera.ready = true;
 
-        document.getElementById("status").textContent =
-            "Kamera hazır";
-
         console.log(
             "Camera started",
             Camera.video.videoWidth,
@@ -60,9 +49,6 @@ async function startCamera() {
     } catch (err) {
 
         console.error(err);
-
-        document.getElementById("status").textContent =
-            "Kamera açılamadı";
 
     }
 
