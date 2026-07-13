@@ -1,7 +1,6 @@
 window.onload = async function () {
 
     await waitForOpenCV();
-
     await startCamera();
 
     const video = getVideo();
@@ -12,41 +11,59 @@ window.onload = async function () {
     function loop() {
 
         if (!cameraReady()) {
-
             requestAnimationFrame(loop);
             return;
-
         }
 
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
 
-        ctx.drawImage(
-            video,
-            0,
-            0,
-            canvas.width,
-            canvas.height
+        // Kamerayı çiz
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        //----------------------------------
+        // OpenCV
+        //----------------------------------
+
+        let src = cv.imread(canvas);
+
+        let gray = new cv.Mat();
+        let blur = new cv.Mat();
+        let edge = new cv.Mat();
+
+        cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
+
+        cv.GaussianBlur(
+            gray,
+            blur,
+            new cv.Size(5,5),
+            0
         );
 
-        const src = cv.imread(canvas);
+        cv.Canny(
+            blur,
+            edge,
+            60,
+            150
+        );
 
-        const quad = detectCard(src);
+        //----------------------------------
+        // EKRANA CANNY BAS
+        //----------------------------------
 
-        if (quad) {
+        cv.imshow(canvas, edge);
 
-            drawCard(canvas, quad);
-
-        }
+        //----------------------------------
 
         src.delete();
+        gray.delete();
+        blur.delete();
+        edge.delete();
 
         requestAnimationFrame(loop);
-
     }
 
     loop();
 
-    console.log("Sistem hazır.");
-
+    console.log("DEBUG MODE");
 };
