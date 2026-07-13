@@ -1,19 +1,31 @@
 window.onload = async function () {
 
-    await waitForOpenCV();
+    try {
 
-    await startCamera();
+        await waitForOpenCV();
 
-    console.log("Sistem hazır.");
+        await startCamera();
 
-    const src = captureFrame(getVideo());
+        // Kameranın ilk görüntüyü oluşturmasını bekle
+        await new Promise(resolve => setTimeout(resolve, 500));
 
-    const gray = preprocess(src);
+        console.log("Sistem hazır.");
 
-    console.log("Frame:", src.cols, src.rows);
-    console.log("Gray :", gray.cols, gray.rows);
+        const src = captureFrame(getVideo());
 
-    src.delete();
-    gray.delete();
+        const gray = preprocess(src);
+
+        console.log("Frame :", src.cols, src.rows);
+        console.log("Gray  :", gray.cols, gray.rows);
+
+        src.delete();
+        gray.delete();
+
+    }
+    catch (err) {
+
+        console.error("APP ERROR:", err);
+
+    }
 
 };
