@@ -1,7 +1,7 @@
 window.onload = async function () {
 
     await waitForOpenCV();
-loadTemplates();
+    await loadTemplates();
     await startCamera();
 
     const video = getVideo();
