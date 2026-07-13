@@ -1,23 +1,26 @@
-/*=========================================*
- * templateBuilder.js
- * Version 1.0
- *=========================================*/
+/*=========================================
+ templateBuilder.js
+ Version 1.0
+=========================================*/
 
-window.onload = () => {
-
+window.onload = function ()
+{
     console.log("Template Builder hazır.");
 
-    const fileInput = document.getElementById("fileInput");
+    const imageFile = document.getElementById("imageFile");
 
-    fileInput.addEventListener("change", loadImage);
-
+    imageFile.addEventListener("change", loadImage);
 };
 
-function loadImage(e)
-{
-    const file = e.target.files[0];
 
-    if (!file) return;
+function loadImage(event)
+{
+    const file = event.target.files[0];
+
+    if (!file)
+    {
+        return;
+    }
 
     const img = new Image();
 
@@ -31,7 +34,12 @@ function loadImage(e)
 
         ctx.drawImage(img, 0, 0);
 
-        console.log("Image loaded:", img.width, img.height);
+        console.log(
+            "Image loaded:",
+            img.width,
+            "x",
+            img.height
+        );
     };
 
     img.src = URL.createObjectURL(file);
