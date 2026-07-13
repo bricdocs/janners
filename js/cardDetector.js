@@ -1,15 +1,10 @@
-/*
-=====================================================
+/*=====================================================
  cardDetector.js
- Version 1.0
- Kart Algılama
-=====================================================
-*/
+ Debug Version
+=====================================================*/
 
 const CardDetector = {
-
     lastQuad: null
-
 };
 
 //------------------------------------------
@@ -22,16 +17,12 @@ function detectCard(src) {
     const blur = new cv.Mat();
     const edge = new cv.Mat();
 
-    cv.cvtColor(
-        src,
-        gray,
-        cv.COLOR_RGBA2GRAY
-    );
+    cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
 
     cv.GaussianBlur(
         gray,
         blur,
-        new cv.Size(5,5),
+        new cv.Size(5, 5),
         0
     );
 
@@ -56,18 +47,11 @@ function detectCard(src) {
     let best = null;
     let bestArea = 0;
 
-    for(let i=0;i<contours.size();i++){
+    for (let i = 0; i < contours.size(); i++) {
 
         const cnt = contours.get(i);
 
         const area = cv.contourArea(cnt);
-
-        if(area < 10000){
-
-            cnt.delete();
-            continue;
-
-        }
 
         const peri = cv.arcLength(
             cnt,
@@ -83,22 +67,37 @@ function detectCard(src) {
             true
         );
 
-        if(
-            approx.rows == 4 &&
-            area > bestArea
-        ){
+        //-------------------------------------------------
+        // DEBUG
+        //-------------------------------------------------
 
-            if(best != null){
+        console.log(
+            "Contour",
+            i,
+            "Area =",
+            Math.round(area),
+            "Vertices =",
+            approx.rows
+        );
 
+        //-------------------------------------------------
+        // Kart seçimi
+        //-------------------------------------------------
+
+        if (
+            area > bestArea &&
+            approx.rows >= 4 &&
+            approx.rows <= 8
+        ) {
+
+            if (best != null) {
                 best.delete();
-
             }
 
             best = approx;
-
             bestArea = area;
 
-        }else{
+        } else {
 
             approx.delete();
 
@@ -112,7 +111,7 @@ function detectCard(src) {
         "Contours =",
         contours.size(),
         "Best Area =",
-        bestArea,
+        Math.round(bestArea),
         "Found =",
         best != null
     );
@@ -126,16 +125,15 @@ function detectCard(src) {
     CardDetector.lastQuad = best;
 
     return best;
-
 }
 
 //------------------------------------------
 // Kartı Çiz
 //------------------------------------------
 
-function drawCard(canvas, quad){
+function drawCard(canvas, quad) {
 
-    if(quad == null)
+    if (quad == null)
         return;
 
     const ctx = canvas.getContext("2d");
@@ -145,31 +143,14 @@ function drawCard(canvas, quad){
     ctx.save();
 
     ctx.strokeStyle = "#00ff00";
-
     ctx.lineWidth = 5;
 
     ctx.beginPath();
 
-    ctx.moveTo(
-        p[0],
-        p[1]
-    );
-
-    ctx.lineTo(
-        p[2],
-        p[3]
-    );
-
-    ctx.lineTo(
-        p[4],
-        p[5]
-    );
-
-    ctx.lineTo(
-        p[6],
-        p[7]
-    );
-
+    ctx.moveTo(p[0], p[1]);
+    ctx.lineTo(p[2], p[3]);
+    ctx.lineTo(p[4], p[5]);
+    ctx.lineTo(p[6], p[7]);
     ctx.closePath();
 
     ctx.stroke();
@@ -182,12 +163,8 @@ function drawCard(canvas, quad){
 // Son Kart
 //------------------------------------------
 
-function getDetectedCard(){
-
+function getDetectedCard() {
     return CardDetector.lastQuad;
-
 }
 
-console.log(
-    "cardDetector.js hazır."
-);
+console.log("cardDetector.js DEBUG hazır.");
