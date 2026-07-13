@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Template Builder</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#222;
+    color:white;
+}
+
+canvas{
+    border:1px solid #666;
+    margin:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Jannersten Template Builder</h2>
+
+<input
+    type="file"
+    id="imageFile"
+    accept="image/*">
+
+<br><br>
+
+<canvas id="canvas"></canvas>
+
+<br>
+
+<canvas id="warpCanvas"></canvas>
+
+<br>
+
+<canvas id="binaryCanvas"></canvas>
+
+<br>
+
+<canvas id="rankCanvas"></canvas>
+
+<canvas id="suitCanvas"></canvas>
+
+<script async src="opencv.js"></script>
+
+<script src="js/opencvLoader.js"></script>
+<script src="js/cardDetector.js"></script>
+<script src="js/cardRecognizer.js"></script>
+<script src="js/templateBuilder.js"></script>
+
+</body>
+
+</html>
