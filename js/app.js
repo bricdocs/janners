@@ -18,38 +18,37 @@ window.onload = async function () {
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
 
-        // Kamerayı çiz
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-
         //----------------------------------
-        // OpenCV
+        // Kamera görüntüsü
         //----------------------------------
 
-        let src = cv.imread(canvas);
-
-        let gray = new cv.Mat();
-        let edge = new cv.Mat();
-
-        cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY);
-
-        cv.Canny(
-            gray,
-            edge,
-            60,
-            150
+        ctx.drawImage(
+            video,
+            0,
+            0,
+            canvas.width,
+            canvas.height
         );
 
-        // SADECE Canny görüntüsünü göster
-        cv.imshow(canvas, edge);
+        //----------------------------------
+        // Kart Algılama
+        //----------------------------------
+
+        const src = cv.imread(canvas);
+
+        const quad = detectCard(src);
+
+        if (quad) {
+            drawCard(canvas, quad);
+        }
 
         src.delete();
-        gray.delete();
-        edge.delete();
 
         requestAnimationFrame(loop);
     }
 
     loop();
 
-    console.log("CANNY TEST MODE");
+    console.log("CARD DETECTOR MODE");
+
 };
