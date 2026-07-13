@@ -1,7 +1,7 @@
 /*=====================================================*
  cardDetector.js
- Version 2.0
-=====================================================*/
+ Version 2.1 DEBUG
+*=====================================================*/
 
 const CardDetector = {
     lastQuad: null
@@ -56,7 +56,7 @@ function detectCard(src) {
     );
 
     //--------------------------------------------------
-    // Close
+    // Morph Close
     //--------------------------------------------------
 
     cv.morphologyEx(
@@ -110,19 +110,32 @@ function detectCard(src) {
             peri * 0.02,
             true
         );
-console.log(
-    "Area:",
-    Math.round(area),
-    "Vertices:",
-    approx.rows
-);
+
+        //--------------------------------------------------
+        // SADECE BÜYÜK CONTOURLARI YAZ
+        //--------------------------------------------------
+
+        if(area > 1000){
+
+            console.log(
+                "Area:",
+                Math.round(area),
+                "Vertices:",
+                approx.rows
+            );
+
+        }
+
+        //--------------------------------------------------
+
         if(
             approx.rows == 4 &&
             area > bestArea
         ){
 
-            if(best)
+            if(best){
                 best.delete();
+            }
 
             best = approx;
             bestArea = area;
@@ -170,20 +183,22 @@ function drawCard(canvas, quad){
 
     const p = quad.data32S;
 
+    if(p.length < 8)
+        return;
+
     ctx.save();
 
-    ctx.strokeStyle="#00ff00";
-    ctx.lineWidth=4;
+    ctx.strokeStyle = "#00ff00";
+    ctx.lineWidth = 4;
 
     ctx.beginPath();
 
-    ctx.moveTo(p[0],p[1]);
-    ctx.lineTo(p[2],p[3]);
-    ctx.lineTo(p[4],p[5]);
-    ctx.lineTo(p[6],p[7]);
+    ctx.moveTo(p[0], p[1]);
+    ctx.lineTo(p[2], p[3]);
+    ctx.lineTo(p[4], p[5]);
+    ctx.lineTo(p[6], p[7]);
 
     ctx.closePath();
-
     ctx.stroke();
 
     ctx.restore();
@@ -198,4 +213,4 @@ function getDetectedCard(){
 
 }
 
-console.log("cardDetector.js v2 hazır.");
+console.log("cardDetector.js v2.1 DEBUG hazır.");
