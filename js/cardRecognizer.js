@@ -9,7 +9,7 @@ function preprocessCorner(card)
 const x = Math.round(card.cols * 0.02);
 const y = Math.round(card.rows * 0.02);
 
-const w = Math.round(card.cols * 0.20);
+const w = Math.round(card.cols * 0.24);
 const h = Math.round(card.rows * 0.24);
 
     // 1- Önce ROI kutusunu çiz
