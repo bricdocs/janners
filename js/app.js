@@ -1,4 +1,3 @@
-```javascript
 window.onload = async function () {
 
     await waitForOpenCV();
@@ -71,4 +70,3 @@ window.onload = async function () {
     console.log("Sistem hazır.");
 
 };
-```
