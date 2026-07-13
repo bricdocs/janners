@@ -38,9 +38,13 @@ window.onload = async function () {
 
         const quad = detectCard(src);
 
-        if (quad) {
-            drawCard(canvas, quad);
-        }
+if (quad) {
+
+    drawCard(canvas, quad);
+
+    warpCard(src, quad);
+
+}
 
         src.delete();
 
