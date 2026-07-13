@@ -41,12 +41,14 @@ window.onload = async function () {
 if (quad) {
 
     drawCard(canvas, quad);
-
-    const warped = warpCard(src, quad);
+    
+const warped = warpCard(src, quad);
 
 if (warped) {
 
-    detectCorner(warped);
+    const gray = preprocessCorner(warped);
+
+    gray.delete();
 
     warped.delete();
 
