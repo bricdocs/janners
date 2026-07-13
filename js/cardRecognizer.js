@@ -5,10 +5,12 @@ Version 1.0
 
 function preprocessCorner(card)
 {
-    const x = 5;
-    const y = 5;
-    const w = 65;
-    const h = 120;
+// Kart boyutuna göre ROI
+const x = Math.round(card.cols * 0.02);
+const y = Math.round(card.rows * 0.02);
+
+const w = Math.round(card.cols * 0.20);
+const h = Math.round(card.rows * 0.24);
 
     // 1- Önce ROI kutusunu çiz
     cv.rectangle(
