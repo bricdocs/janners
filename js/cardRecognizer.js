@@ -46,8 +46,41 @@ const h = Math.round(card.rows * 0.24);
     // 6- Sonucu göster
     cv.imshow("binaryCanvas", binary);
 
-    roi.delete();
-    gray.delete();
+//----------------------------------
+// Rank ROI
+//----------------------------------
 
-    return binary;
+const rankRect = new cv.Rect(
+    0,
+    0,
+    binary.cols,
+    Math.floor(binary.rows * 0.45)
+);
+
+const rank = binary.roi(rankRect);
+
+cv.imshow("rankCanvas", rank);
+
+//----------------------------------
+// Suit ROI
+//----------------------------------
+
+const suitRect = new cv.Rect(
+    0,
+    Math.floor(binary.rows * 0.45),
+    binary.cols,
+    binary.rows - Math.floor(binary.rows * 0.45)
+);
+
+const suit = binary.roi(suitRect);
+
+cv.imshow("suitCanvas", suit);
+    
+roi.delete();
+gray.delete();
+
+rank.delete();
+suit.delete();
+
+return binary;
 }
