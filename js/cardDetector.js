@@ -364,8 +364,8 @@ function detectCorner(card) {
         new cv.Rect(
             0,
             0,
-            50,
-            90
+            65,
+            120
         )
     );
 
