@@ -234,6 +234,22 @@ function warpCardManual(src, points)
     return warped;
 }
 
+
+function saveMat(mat,fileName)
+{
+    const canvas=document.createElement("canvas");
+
+    cv.imshow(canvas,mat);
+
+    const link=document.createElement("a");
+
+    link.download=fileName;
+
+    link.href=canvas.toDataURL("image/png");
+
+    link.click();
+}
+
 function saveCanvas(canvasId, fileName)
 {
     const canvas = document.getElementById(canvasId);
@@ -252,19 +268,75 @@ function saveRank()
     const name =
         document.getElementById("rankName").value;
 
-    saveCanvas(
-        "rankCanvas",
-        name + ".png"
-    );
+const src=cv.imread("rankCanvas");
+
+const crop=cropBinary(src);
+
+cv.imshow("rankCanvas",crop);
+
+saveMat(crop,name+".png");
+
+src.delete();
+crop.delete();
 }
+
 
 function saveSuit()
 {
     const name =
         document.getElementById("suitName").value;
 
-    saveCanvas(
-        "suitCanvas",
-        name + ".png"
+const src=cv.imread("suitCanvas");
+
+const crop=cropBinary(src);
+
+cv.imshow("suitCanvas",crop);
+
+saveMat(crop,name+".png");
+
+src.delete();
+crop.delete();
+}
+
+//----------------------------------
+// Beyaz kenarları otomatik kırp
+//----------------------------------
+
+function cropBinary(src)
+{
+    let minX = src.cols;
+    let minY = src.rows;
+
+    let maxX = 0;
+    let maxY = 0;
+
+    for(let y=0;y<src.rows;y++)
+    {
+        for(let x=0;x<src.cols;x++)
+        {
+            const value = src.ucharPtr(y,x)[0];
+
+            // Siyah piksel
+            if(value==0)
+            {
+                if(x<minX) minX=x;
+                if(y<minY) minY=y;
+
+                if(x>maxX) maxX=x;
+                if(y>maxY) maxY=y;
+            }
+        }
+    }
+
+    if(maxX<=minX || maxY<=minY)
+        return src.clone();
+
+    const rect=new cv.Rect(
+        minX,
+        minY,
+        maxX-minX+1,
+        maxY-minY+1
     );
+
+    return src.roi(rect).clone();
 }
