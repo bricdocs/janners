@@ -41,7 +41,7 @@ cv.threshold(
     binary,
     0,
     255,
-    cv.THRESH_BINARY + cv.THRESH_OTSU
+    cv.THRESH_BINARY_INV + cv.THRESH_OTSU
 );
 
 const kernel = cv.Mat.ones(
