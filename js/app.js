@@ -58,11 +58,10 @@ console.log(
     rankCrop.rows
 );
 
-rankCrop.delete();
-
-    
 const rankResult =
-    matchTemplate(corner.rank, Templates.ranks);
+matchTemplate(rankCrop, Templates.ranks);
+
+rankCrop.delete();
 
 console.log(
     "Rank Match:",
