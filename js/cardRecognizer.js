@@ -109,6 +109,12 @@ return {
 
 function cropBinary(src)
 {
+console.log(
+    "cropBinary INPUT:",
+    src.cols,
+    src.rows
+);
+    
     let minX = src.cols;
     let minY = src.rows;
 
@@ -142,5 +148,13 @@ function cropBinary(src)
         maxY-minY+1
     );
 
-    return src.roi(rect).clone();
+const crop = src.roi(rect).clone();
+
+console.log(
+    "cropBinary OUTPUT:",
+    crop.cols,
+    crop.rows
+);
+
+return crop;
 }
