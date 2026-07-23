@@ -49,6 +49,16 @@ if (warped) {
 
 const corner = preprocessCorner(warped);
 
+const rankResult =
+    matchTemplate(parts.rank, Templates.ranks);
+
+console.log(
+    "Rank Match:",
+    rankResult.name,
+    rankResult.score
+);
+
+
 // Şimdilik sadece test
 console.log(
     "Rank:",
