@@ -158,3 +158,48 @@ function recognizeSuit(suit)
 
     return bestName;
 }
+
+//--------------------------------------------------
+// Template Match
+//--------------------------------------------------
+
+function matchTemplate(img, templates)
+{
+    let bestName = "";
+    let bestScore = -1;
+
+    for(const name in templates)
+    {
+        const tpl = templates[name];
+
+        if(
+            img.cols != tpl.cols ||
+            img.rows != tpl.rows
+        )
+            continue;
+
+        const result = new cv.Mat();
+
+        cv.matchTemplate(
+            img,
+            tpl,
+            result,
+            cv.TM_CCOEFF_NORMED
+        );
+
+        const mm = cv.minMaxLoc(result);
+
+        if(mm.maxVal > bestScore)
+        {
+            bestScore = mm.maxVal;
+            bestName = name;
+        }
+
+        result.delete();
+    }
+
+    return {
+        name: bestName,
+        score: bestScore
+    };
+}
