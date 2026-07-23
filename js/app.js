@@ -49,6 +49,18 @@ if (warped) {
 
 const corner = preprocessCorner(warped);
 
+const rankCrop = cropBinary(corner.rank);
+
+console.log(
+    "Rank Crop:",
+    rankCrop.cols,
+    "x",
+    rankCrop.rows
+);
+
+rankCrop.delete();
+
+    
 const rankResult =
     matchTemplate(corner.rank, Templates.ranks);
 
