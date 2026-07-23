@@ -172,11 +172,33 @@ function matchTemplate(img, templates)
     {
         const tpl = templates[name];
 
+ console.log(
+    "Template:",
+    name,
+    tpl.cols,
+    tpl.rows
+);
+
+console.log(
+    "Image:",
+    img.cols,
+    img.rows
+);       
+        
         if(
             img.cols != tpl.cols ||
             img.rows != tpl.rows
         )
-            continue;
+
+            
+if(
+    img.cols != tpl.cols ||
+    img.rows != tpl.rows
+)
+{
+    console.log("Size mismatch");
+    continue;
+}
 
         const result = new cv.Mat();
 
