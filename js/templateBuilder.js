@@ -257,3 +257,14 @@ function saveRank()
         name + ".png"
     );
 }
+
+function saveSuit()
+{
+    const name =
+        document.getElementById("suitName").value;
+
+    saveCanvas(
+        "suitCanvas",
+        name + ".png"
+    );
+}
