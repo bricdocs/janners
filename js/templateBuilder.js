@@ -62,30 +62,10 @@ canvas.onclick = onCanvasClick;
             img.height
         );
 
-        //--------------------------------------------------
-        // OpenCV
-        //--------------------------------------------------
-
-        const src = cv.imread(canvas);
-
-        //--------------------------------------------------
-        // Kartı bul
-        //--------------------------------------------------
-
-        const quad = detectCard(src);
-
-        if (quad)
-        {
-            drawCard(canvas, quad);
-
-            console.log("Kart bulundu.");
-        }
-        else
-        {
-            console.log("Kart bulunamadı.");
-        }
-
-        src.delete();
+ console.log(
+    "Lütfen kartın 4 köşesini seçiniz."
+);    
+ 
     };
 
     img.src = URL.createObjectURL(file);
