@@ -50,7 +50,7 @@ if (warped) {
 const corner = preprocessCorner(warped);
 
 const rankResult =
-    matchTemplate(parts.rank, Templates.ranks);
+    matchTemplate(corner.rank, Templates.ranks);
 
 console.log(
     "Rank Match:",
