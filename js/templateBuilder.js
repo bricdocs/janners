@@ -116,6 +116,30 @@ function onCanvasClick(event)
     );
 
     drawPoints();
+
+    //----------------------------------
+    // 4 köşe tamamlandı
+    //----------------------------------
+
+    if (clickPoints.length == 4)
+    {
+        console.log("4 corner selected.");
+
+        const quad = makeQuad(clickPoints);
+
+        const src = cv.imread("sourceCanvas");
+
+        const warped = warpCard(
+            src,
+            quad
+        );
+
+        preprocessCorner(warped);
+
+        quad.delete();
+        warped.delete();
+        src.delete();
+    }
 }
 
 function drawPoints()
@@ -146,4 +170,26 @@ function drawPoints()
 
         ctx.fill();
     }
+}
+//----------------------------------
+// Mouse points -> Quad
+//----------------------------------
+
+function makeQuad(points)
+{
+    const quad = new cv.Mat(
+        4,
+        1,
+        cv.CV_32SC2
+    );
+
+    const p = quad.data32S;
+
+    for (let i = 0; i < 4; i++)
+    {
+        p[i * 2]     = Math.round(points[i].x);
+        p[i * 2 + 1] = Math.round(points[i].y);
+    }
+
+    return quad;
 }
