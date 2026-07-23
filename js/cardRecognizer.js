@@ -126,7 +126,9 @@ console.log(
         for(let x=0;x<src.cols;x++)
         {
             const value = src.ucharPtr(y,x)[0];
-
+if(x==10 && y==10)
+    console.log("Pixel =", value);
+            
             if(value==0)
             {
                 if(x<minX) minX=x;
