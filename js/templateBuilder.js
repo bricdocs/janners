@@ -233,3 +233,27 @@ function warpCardManual(src, points)
 
     return warped;
 }
+
+function saveCanvas(canvasId, fileName)
+{
+    const canvas = document.getElementById(canvasId);
+
+    const link = document.createElement("a");
+
+    link.download = fileName;
+
+    link.href = canvas.toDataURL("image/png");
+
+    link.click();
+}
+
+function saveRank()
+{
+    const name =
+        document.getElementById("rankName").value;
+
+    saveCanvas(
+        "rankCanvas",
+        name + ".png"
+    );
+}
