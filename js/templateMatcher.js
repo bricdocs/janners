@@ -36,30 +36,35 @@ async function loadTemplates() {
 
 console.log("templateMatcher.js hazır.");
 
-async function loadImageMat(path)
+
+//--------------------------------------------------
+// PNG dosyasını Mat olarak yükle
+//--------------------------------------------------
+
+function loadImageMat(path)
 {
-    return new Promise(resolve=>{
+    return new Promise(resolve =>
+    {
+        const img = new Image();
 
-        const img=new Image();
+        img.onload = function()
+        {
+            const canvas =
+                document.createElement("canvas");
 
-        img.onload=function(){
+            canvas.width = img.width;
+            canvas.height = img.height;
 
-            const canvas=document.createElement("canvas");
-
-            canvas.width=img.width;
-            canvas.height=img.height;
-
-            const ctx=canvas.getContext("2d");
+            const ctx =
+                canvas.getContext("2d");
 
             ctx.drawImage(img,0,0);
 
-            const mat=cv.imread(canvas);
+            const mat = cv.imread(canvas);
 
             resolve(mat);
-
         };
 
-        img.src=path;
-
+        img.src = path;
     });
 }
