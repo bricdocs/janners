@@ -68,3 +68,93 @@ function loadImageMat(path)
         img.src = path;
     });
 }
+
+//----------------------------------
+// İki binary resmi karşılaştır
+//----------------------------------
+
+function compareBinary(img1, img2)
+{
+    if (
+        img1.cols != img2.cols ||
+        img1.rows != img2.rows
+    )
+        return 0;
+
+    let equal = 0;
+    const total = img1.cols * img1.rows;
+
+    for (let y = 0; y < img1.rows; y++)
+    {
+        for (let x = 0; x < img1.cols; x++)
+        {
+            if (
+                img1.ucharPtr(y,x)[0] ==
+                img2.ucharPtr(y,x)[0]
+            )
+            {
+                equal++;
+            }
+        }
+    }
+
+    return equal / total;
+}
+
+function recognizeRank(rank)
+{
+    let bestName = "";
+    let bestScore = 0;
+
+    for(const name in Templates.ranks)
+    {
+        const score =
+            compareBinary(
+                rank,
+                Templates.ranks[name]
+            );
+
+        if(score > bestScore)
+        {
+            bestScore = score;
+            bestName = name;
+        }
+    }
+
+    console.log(
+        "Rank:",
+        bestName,
+        bestScore
+    );
+
+    return bestName;
+}
+
+function recognizeSuit(suit)
+{
+    let bestName = "";
+    let bestScore = 0;
+
+    for(const name in Templates.suits)
+    {
+        const score =
+            compareBinary(
+                suit,
+                Templates.suits[name]
+            );
+
+        if(score > bestScore)
+        {
+            bestScore = score;
+            bestName = name;
+        }
+    }
+
+    console.log(
+        "Suit:",
+        bestName,
+        bestScore
+    );
+
+    return bestName;
+}
