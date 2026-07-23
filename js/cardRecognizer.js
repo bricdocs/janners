@@ -106,3 +106,41 @@ return {
 };
     
 }
+
+function cropBinary(src)
+{
+    let minX = src.cols;
+    let minY = src.rows;
+
+    let maxX = 0;
+    let maxY = 0;
+
+    for(let y=0;y<src.rows;y++)
+    {
+        for(let x=0;x<src.cols;x++)
+        {
+            const value = src.ucharPtr(y,x)[0];
+
+            if(value==0)
+            {
+                if(x<minX) minX=x;
+                if(y<minY) minY=y;
+
+                if(x>maxX) maxX=x;
+                if(y>maxY) maxY=y;
+            }
+        }
+    }
+
+    if(maxX<=minX || maxY<=minY)
+        return src.clone();
+
+    const rect = new cv.Rect(
+        minX,
+        minY,
+        maxX-minX+1,
+        maxY-minY+1
+    );
+
+    return src.roi(rect).clone();
+}
