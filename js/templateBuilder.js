@@ -125,16 +125,17 @@ function onCanvasClick(event)
     {
         console.log("4 corner selected.");
 
-        const quad = makeQuad(clickPoints);
+ const quad = makeQuad(clickPoints);
+console.log("Quad OK");
 
-        const src = cv.imread("sourceCanvas");
+const src = cv.imread("sourceCanvas");
+console.log("imread OK");
 
-        const warped = warpCard(
-            src,
-            quad
-        );
+const warped = warpCard(src, quad);
+console.log("warp OK");
 
-        preprocessCorner(warped);
+preprocessCorner(warped);
+console.log("preprocess OK");
 
         quad.delete();
         warped.delete();
