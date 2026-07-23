@@ -3,6 +3,14 @@
  Version 1.0
 =========================================*/
 
+//----------------------------------
+// Mouse Points
+//----------------------------------
+
+let clickPoints = [];
+
+let sourceImage = null;
+
 window.onload = async function ()
 {
     await waitForOpenCV();
@@ -39,6 +47,14 @@ function loadImage(event)
 
         ctx.drawImage(img, 0, 0);
 
+sourceImage = img;
+
+// Eski noktaları temizle
+clickPoints = [];
+
+// Mouse event
+canvas.onclick = onCanvasClick;
+     
         console.log(
             "Image loaded:",
             img.width,
@@ -73,4 +89,61 @@ function loadImage(event)
     };
 
     img.src = URL.createObjectURL(file);
+}
+
+function onCanvasClick(event)
+{
+    const canvas = event.target;
+
+    const rect = canvas.getBoundingClientRect();
+
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    const x = (event.clientX - rect.left) * scaleX;
+    const y = (event.clientY - rect.top) * scaleY;
+
+    clickPoints.push({
+        x: x,
+        y: y
+    });
+
+    console.log(
+        "Point",
+        clickPoints.length,
+        x,
+        y
+    );
+
+    drawPoints();
+}
+
+function drawPoints()
+{
+    const canvas = document.getElementById("sourceCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Resmi tekrar çiz
+    ctx.drawImage(
+        sourceImage,
+        0,
+        0
+    );
+
+    ctx.fillStyle = "red";
+
+    for (const p of clickPoints)
+    {
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            8,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+    }
 }
