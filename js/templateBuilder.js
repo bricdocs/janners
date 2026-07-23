@@ -131,7 +131,10 @@ console.log("Quad OK");
 const src = cv.imread("sourceCanvas");
 console.log("imread OK");
 
-const warped = warpCard(src, quad);
+const warped = warpCardManual(
+    src,
+    clickPoints
+);
 console.log("warp OK");
 
 preprocessCorner(warped);
@@ -193,4 +196,60 @@ function makeQuad(points)
     }
 
     return quad;
+}
+
+//----------------------------------
+// Manuel Warp (Template Builder)
+//----------------------------------
+
+function warpCardManual(src, points)
+{
+    const W = 200;
+    const H = 300;
+
+    const srcPts = cv.matFromArray(
+        4,
+        1,
+        cv.CV_32FC2,
+        [
+            points[0].x, points[0].y,   // TL
+            points[1].x, points[1].y,   // TR
+            points[2].x, points[2].y,   // BR
+            points[3].x, points[3].y    // BL
+        ]
+    );
+
+    const dstPts = cv.matFromArray(
+        4,
+        1,
+        cv.CV_32FC2,
+        [
+            0,0,
+            W-1,0,
+            W-1,H-1,
+            0,H-1
+        ]
+    );
+
+    const M = cv.getPerspectiveTransform(
+        srcPts,
+        dstPts
+    );
+
+    const warped = new cv.Mat();
+
+    cv.warpPerspective(
+        src,
+        warped,
+        M,
+        new cv.Size(W,H)
+    );
+
+    cv.imshow("warpCanvas", warped);
+
+    srcPts.delete();
+    dstPts.delete();
+    M.delete();
+
+    return warped;
 }
