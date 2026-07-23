@@ -47,11 +47,28 @@ const warped = warpCard(src, quad);
 
 if (warped) {
 
-    const gray = preprocessCorner(warped);
+const corner = preprocessCorner(warped);
 
-    gray.delete();
+// Şimdilik sadece test
+console.log(
+    "Rank:",
+    corner.rank.cols,
+    "x",
+    corner.rank.rows
+);
 
-    warped.delete();
+console.log(
+    "Suit:",
+    corner.suit.cols,
+    "x",
+    corner.suit.rows
+);
+
+corner.binary.delete();
+corner.rank.delete();
+corner.suit.delete();
+
+warped.delete();
 
 }
 
