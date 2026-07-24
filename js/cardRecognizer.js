@@ -33,6 +33,9 @@ const h = Math.round(card.rows * 0.24);
     const gray = new cv.Mat();
     cv.cvtColor(roi, gray, cv.COLOR_RGBA2GRAY);
 cv.imshow("binaryCanvas", gray);
+
+DebugImages.gray =
+    document.getElementById("binaryCanvas");    
     
     // 5- Binary
 const binary = new cv.Mat();
@@ -78,6 +81,9 @@ const rank = binary.roi(rankRect);
 
 cv.imshow("rankCanvas", rank);
 
+DebugImages.rankBefore =
+    document.getElementById("rankCanvas");    
+
 saveMat(rank, "runtime_rank.png");
     
 //----------------------------------
@@ -94,6 +100,9 @@ const suitRect = new cv.Rect(
 const suit = binary.roi(suitRect);
 
 cv.imshow("suitCanvas", suit);
+
+DebugImages.suit =
+    document.getElementById("suitCanvas");    
 
 // Artık binary silinmeyecek.
 // rank ve suit de silinmeyecek.
@@ -171,6 +180,9 @@ console.log(
     const crop = src.roi(rect).clone();
 
 cv.imshow("rankCanvas", crop);
+
+DebugImages.rankAfter =
+    document.getElementById("rankCanvas");    
     
     console.log(
         "cropBinary OUTPUT:",
