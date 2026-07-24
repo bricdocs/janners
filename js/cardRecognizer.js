@@ -109,26 +109,27 @@ return {
 
 function cropBinary(src)
 {
-console.log(
-    "cropBinary INPUT:",
-    src.cols,
-    src.rows
-);
-    
+    console.log(
+        "cropBinary INPUT:",
+        src.cols,
+        src.rows
+    );
+
     let minX = src.cols;
     let minY = src.rows;
 
     let maxX = 0;
     let maxY = 0;
 
-    for(let y=0;y<src.rows;y++)
+    for(let y=0; y<src.rows; y++)
     {
-        for(let x=0;x<src.cols;x++)
+        for(let x=0; x<src.cols; x++)
         {
             const value = src.ucharPtr(y,x)[0];
-if(x==10 && y==10)
-    console.log("Pixel =", value);
-            
+
+            if(x==10 && y==10)
+                console.log("Pixel =", value);
+
             if(value==0)
             {
                 if(x<minX) minX=x;
@@ -150,13 +151,13 @@ if(x==10 && y==10)
         maxY-minY+1
     );
 
-const crop = src.roi(rect).clone();
+    const crop = src.roi(rect).clone();
 
-console.log(
-    "cropBinary OUTPUT:",
-    crop.cols,
-    crop.rows
-);
+    console.log(
+        "cropBinary OUTPUT:",
+        crop.cols,
+        crop.rows
+    );
 
-return crop;
+    return crop;
 }
