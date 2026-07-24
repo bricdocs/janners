@@ -177,3 +177,18 @@ cv.imshow("rankCanvas", crop);
 
     return crop;
 }
+
+function saveMat(mat, fileName)
+{
+    const canvas = document.createElement("canvas");
+
+    cv.imshow(canvas, mat);
+
+    const link = document.createElement("a");
+
+    link.download = fileName;
+
+    link.href = canvas.toDataURL("image/png");
+
+    link.click();
+}
