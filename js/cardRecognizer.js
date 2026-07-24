@@ -121,6 +121,25 @@ return {
 
 function cropBinary(src)
 {
+console.log(
+    "Channels:", src.channels(),
+    "Type:", src.type(),
+    "Depth:", src.depth()
+);
+
+console.log(
+    "Continuous:", src.isContinuous()
+);
+
+const debug = src.clone();
+
+cv.imshow("rankCanvas", debug);
+
+saveMat(debug, "crop_input.png");
+
+debug.delete();    
+    
+    
     console.log(
         "cropBinary INPUT:",
         src.cols,
