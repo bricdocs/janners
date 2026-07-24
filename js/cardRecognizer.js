@@ -146,6 +146,14 @@ cv.imshow("rankCanvas", src);
     if(maxX<=minX || maxY<=minY)
         return src.clone();
 
+console.log(
+    "Bounds:",
+    minX,
+    minY,
+    maxX,
+    maxY
+);
+    
     const rect = new cv.Rect(
         minX,
         minY,
