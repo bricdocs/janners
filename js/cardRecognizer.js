@@ -84,7 +84,7 @@ cv.imshow("rankCanvas", rank);
 DebugImages.rankBefore =
     document.getElementById("rankCanvas");    
 
-saveMat(rank, "runtime_rank.png");
+//saveMat(rank, "runtime_rank.png");
     
 //----------------------------------
 // Suit ROI
