@@ -220,6 +220,18 @@ console.log(
 // Beyaz piksel arama
 //----------------------------------
 
+for (let y = 0; y < src.rows; y++)
+{
+    let row = "";
+
+    for (let x = 0; x < src.cols; x++)
+    {
+        row += (src.ucharPtr(y,x)[0] == 255) ? "." : "#";
+    }
+
+    console.log(row);
+}
+    
     
     for(let y=0; y<src.rows; y++)
     {
