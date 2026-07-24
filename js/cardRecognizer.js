@@ -130,7 +130,7 @@ function cropBinary(src)
             if(x==10 && y==10)
                 console.log("Pixel =", value);
 
-            if(value==0)
+            if(value==255)
             {
                 if(x<minX) minX=x;
                 if(y<minY) minY=y;
