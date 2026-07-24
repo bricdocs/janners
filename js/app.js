@@ -3,6 +3,15 @@
  Version 1.0
 =====================================================*/
 
+let DebugImages = {
+    source: null,
+    warp: null,
+    gray: null,
+    rankBefore: null,
+    rankAfter: null,
+    suit: null
+};
+
 window.onload = async function () {
 
     await waitForOpenCV();
@@ -36,6 +45,8 @@ window.onload = async function () {
             canvas.height
         );
 
+DebugImages.source = canvas;
+     
         //----------------------------------
         // Kart Algılama
         //----------------------------------
