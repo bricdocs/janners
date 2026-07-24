@@ -164,6 +164,35 @@ cv.imshow("rankCanvas", src);
     let maxX = 0;
     let maxY = 0;
 
+//----------------------------------
+// Köşe piksellerini kontrol et
+//----------------------------------
+
+console.log(
+    "Top-left =",
+    src.ucharPtr(0,0)[0]
+);
+
+console.log(
+    "Top-right =",
+    src.ucharPtr(0,src.cols-1)[0]
+);
+
+console.log(
+    "Bottom-left =",
+    src.ucharPtr(src.rows-1,0)[0]
+);
+
+console.log(
+    "Bottom-right =",
+    src.ucharPtr(src.rows-1,src.cols-1)[0]
+);
+
+//----------------------------------
+// Beyaz piksel arama
+//----------------------------------
+
+    
     for(let y=0; y<src.rows; y++)
     {
         for(let x=0; x<src.cols; x++)
