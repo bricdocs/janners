@@ -3,6 +3,8 @@ cardRecognizer.js
 Version 1.0
 =========================================*/
 
+let cropDebugSaved = false;
+
 function preprocessCorner(card)
 {
 // Kart boyutuna göre ROI
@@ -135,7 +137,11 @@ const debug = src.clone();
 
 cv.imshow("rankCanvas", debug);
 
-saveMat(debug, "crop_input.png");
+if (!cropDebugSaved)
+{
+    saveMat(debug, "crop_input.png");
+    cropDebugSaved = true;
+}
 
 debug.delete();    
     
