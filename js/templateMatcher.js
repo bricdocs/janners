@@ -60,9 +60,20 @@ function loadImageMat(path)
 
             ctx.drawImage(img,0,0);
 
-            const mat = cv.imread(canvas);
+const rgba = cv.imread(canvas);
 
-            resolve(mat);
+const gray = new cv.Mat();
+
+cv.cvtColor(
+    rgba,
+    gray,
+    cv.COLOR_RGBA2GRAY
+);
+
+rgba.delete();
+
+resolve(gray);
+            
         };
 
         img.src = path;
