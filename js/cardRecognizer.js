@@ -64,12 +64,12 @@ const kernel = cv.Mat.ones(
     cv.CV_8U
 );
 
-cv.morphologyEx(
-    binary,
-    binary,
-    cv.MORPH_CLOSE,
-    kernel
-);
+//cv.morphologyEx(
+//    binary,
+//    binary,
+//    cv.MORPH_CLOSE,
+//    kernel
+//);
 
 kernel.delete();
 
