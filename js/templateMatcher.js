@@ -168,79 +168,76 @@ function matchTemplate(img, templates)
     let bestName = "";
     let bestScore = -1;
 
-    for(const name in templates)
+    for (const name in templates)
     {
         const tpl = templates[name];
 
- console.log(
-    "Template:",
-    name,
-    tpl.cols,
-    tpl.rows
-);
+        console.log(
+            "Template:",
+            name,
+            tpl.cols,
+            tpl.rows
+        );
 
-console.log(
-    "Image:",
-    img.cols,
-    img.rows
-);       
-        
-        if(
+        console.log(
+            "Image:",
+            img.cols,
+            img.rows
+        );
+
+        const input = new cv.Mat();
+
+        if (
             img.cols != tpl.cols ||
             img.rows != tpl.rows
         )
+        {
+            console.log(
+                "Resize:",
+                img.cols, "x", img.rows,
+                "->",
+                tpl.cols, "x", tpl.rows
+            );
 
-            
-const input = new cv.Mat();
+            cv.resize(
+                img,
+                input,
+                new cv.Size(tpl.cols, tpl.rows),
+                0,
+                0,
+                cv.INTER_AREA
+            );
+        }
+        else
+        {
+            img.copyTo(input);
+        }
 
-if (
-    img.cols != tpl.cols ||
-    img.rows != tpl.rows
-)
-{
-    console.log(
-        "Resize:",
-        img.cols, "x", img.rows,
-        "->",
-        tpl.cols, "x", tpl.rows
-    );
+        const result = new cv.Mat();
 
-    cv.resize(
-        img,
-        input,
-        new cv.Size(
-            tpl.cols,
-            tpl.rows
-        ),
-        0,
-        0,
-        cv.INTER_AREA
-    );
-}
-else
-{
-    img.copyTo(input);
-}
-
-const result = new cv.Mat();
-
-cv.matchTemplate(
-    input,
-    tpl,
-    result,
-    cv.TM_CCOEFF_NORMED
-);
+        cv.matchTemplate(
+            input,
+            tpl,
+            result,
+            cv.TM_CCOEFF_NORMED
+        );
 
         const mm = cv.minMaxLoc(result);
 
-        if(mm.maxVal > bestScore)
+        console.log(
+            "Score:",
+            name,
+            mm.maxVal
+        );
+
+        if (mm.maxVal > bestScore)
         {
             bestScore = mm.maxVal;
             bestName = name;
         }
 
         result.delete();
-  input.delete();      
+        input.delete();
     }
 
     return {
