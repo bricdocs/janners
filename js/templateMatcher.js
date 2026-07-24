@@ -215,6 +215,20 @@ function matchTemplate(img, templates)
 
         const result = new cv.Mat();
 
+console.log(
+    "Input:",
+    input.cols,
+    input.rows,
+    input.type()
+);
+
+console.log(
+    "Template:",
+    tpl.cols,
+    tpl.rows,
+    tpl.type()
+);
+        
         cv.matchTemplate(
             input,
             tpl,
