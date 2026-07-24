@@ -123,3 +123,29 @@ warped.delete();
     console.log("CARD DETECTOR MODE");
 
 };
+
+
+function saveCanvas(canvas, fileName)
+{
+    if (!canvas)
+        return;
+
+    const link = document.createElement("a");
+
+    link.download = fileName;
+    link.href = canvas.toDataURL("image/png");
+
+    link.click();
+}
+
+function saveDebugImages()
+{
+    saveCanvas(DebugImages.source, "source.png");
+    saveCanvas(DebugImages.warp, "warp.png");
+    saveCanvas(DebugImages.gray, "gray.png");
+    saveCanvas(DebugImages.rankBefore, "rank_before_crop.png");
+    saveCanvas(DebugImages.rankAfter, "rank_after_crop.png");
+    saveCanvas(DebugImages.suit, "suit.png");
+
+    console.log("Debug PNG saved.");
+}
