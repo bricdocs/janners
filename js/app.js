@@ -63,6 +63,8 @@ console.log(
     rankCrop.rows
 );
 
+saveMat(rankCrop, "runtime.png");
+ 
 const rankResult =
 matchTemplate(rankCrop, Templates.ranks);
 
