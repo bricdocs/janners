@@ -346,6 +346,9 @@ function warpCard(src, quad) {
 
     cv.imshow("warpCanvas", warped);
 
+DebugImages.warp =
+    document.getElementById("warpCanvas");
+ 
     srcPts.delete();
     dstPts.delete();
     M.delete();
