@@ -266,18 +266,30 @@ function saveCanvas(canvasId, fileName)
 function saveRank()
 {
     const name =
-        document.getElementById("rankName").value;
+    document.getElementById("rankName").value;
 
-const src=cv.imread("rankCanvas");
+    const src = cv.imread("rankCanvas");
 
-const crop=cropBinary(src);
+    console.log(
+        "rankCanvas read:",
+        src.cols,
+        src.rows
+    );
 
-cv.imshow("rankCanvas",crop);
+    const crop = cropBinary(src);
 
-saveMat(crop,name+".png");
+    console.log(
+        "crop:",
+        crop.cols,
+        crop.rows
+    );
 
-src.delete();
-crop.delete();
+    cv.imshow("rankCanvas", crop);
+
+    saveMat(crop, name + ".png");
+
+    src.delete();
+    crop.delete();
 }
 
 
