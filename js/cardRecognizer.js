@@ -115,6 +115,10 @@ function cropBinary(src)
         src.rows
     );
 
+const test = src.clone();
+cv.imshow("binaryCanvas", test);
+test.delete();
+    
 cv.imshow("rankCanvas", src);
     
     let minX = src.cols;
