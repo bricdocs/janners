@@ -191,23 +191,45 @@ console.log(
         )
 
             
-if(
+const input = new cv.Mat();
+
+if (
     img.cols != tpl.cols ||
     img.rows != tpl.rows
 )
 {
-    console.log("Size mismatch");
-    continue;
+    console.log(
+        "Resize:",
+        img.cols, "x", img.rows,
+        "->",
+        tpl.cols, "x", tpl.rows
+    );
+
+    cv.resize(
+        img,
+        input,
+        new cv.Size(
+            tpl.cols,
+            tpl.rows
+        ),
+        0,
+        0,
+        cv.INTER_AREA
+    );
+}
+else
+{
+    img.copyTo(input);
 }
 
-        const result = new cv.Mat();
+const result = new cv.Mat();
 
-        cv.matchTemplate(
-            img,
-            tpl,
-            result,
-            cv.TM_CCOEFF_NORMED
-        );
+cv.matchTemplate(
+    input,
+    tpl,
+    result,
+    cv.TM_CCOEFF_NORMED
+);
 
         const mm = cv.minMaxLoc(result);
 
@@ -218,6 +240,7 @@ if(
         }
 
         result.delete();
+  input.delete();      
     }
 
     return {
