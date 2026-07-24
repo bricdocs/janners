@@ -32,7 +32,8 @@ const h = Math.round(card.rows * 0.24);
     // 4- Gray
     const gray = new cv.Mat();
     cv.cvtColor(roi, gray, cv.COLOR_RGBA2GRAY);
-
+cv.imshow("binaryCanvas", gray);
+    
     // 5- Binary
 const binary = new cv.Mat();
 
