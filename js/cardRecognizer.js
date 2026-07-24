@@ -91,6 +91,26 @@ const rank = binary.roi(rankRect);
 
 cv.imshow("rankCanvas", rank);
 
+let black = 0;
+let white = 0;
+
+for (let y = 0; y < rank.rows; y++)
+{
+    for (let x = 0; x < rank.cols; x++)
+    {
+        if (rank.ucharPtr(y, x)[0] == 0)
+            black++;
+        else
+            white++;
+    }
+}
+
+console.log(
+    "Rank pixels:",
+    "Black =", black,
+    "White =", white
+);
+    
 DebugImages.rankBefore =
     document.getElementById("rankCanvas");    
 
