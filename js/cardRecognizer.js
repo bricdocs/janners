@@ -155,6 +155,8 @@ cv.imshow("rankCanvas", src);
 
     const crop = src.roi(rect).clone();
 
+cv.imshow("rankCanvas", crop);
+    
     console.log(
         "cropBinary OUTPUT:",
         crop.cols,
