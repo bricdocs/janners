@@ -50,6 +50,14 @@ cv.threshold(
     cv.THRESH_BINARY_INV + cv.THRESH_OTSU
 );
 
+console.log(
+    "Binary corner pixels:",
+    binary.ucharPtr(0,0)[0],
+    binary.ucharPtr(0,binary.cols-1)[0],
+    binary.ucharPtr(binary.rows-1,0)[0],
+    binary.ucharPtr(binary.rows-1,binary.cols-1)[0]
+);
+    
 const kernel = cv.Mat.ones(
     3,
     3,
