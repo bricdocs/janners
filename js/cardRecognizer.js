@@ -45,9 +45,9 @@ const binary = new cv.Mat();
 cv.threshold(
     gray,
     binary,
-    0,
+    120,
     255,
-    cv.THRESH_BINARY_INV + cv.THRESH_OTSU
+    cv.THRESH_BINARY_INV
 );
 
 console.log(
