@@ -77,6 +77,8 @@ const rank = binary.roi(rankRect);
 
 cv.imshow("rankCanvas", rank);
 
+saveMat(rank, "runtime_rank.png");
+    
 //----------------------------------
 // Suit ROI
 //----------------------------------
@@ -187,7 +189,6 @@ function saveMat(mat, fileName)
     const link = document.createElement("a");
 
     link.download = fileName;
-
     link.href = canvas.toDataURL("image/png");
 
     link.click();
