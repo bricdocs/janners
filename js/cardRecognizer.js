@@ -167,6 +167,15 @@ cv.imshow("rankCanvas", debug);
 
 if (!cropDebugSaved)
 {
+
+console.log(
+    "SaveMat:",
+    debug.cols,
+    debug.rows,
+    "NonZero =",
+    cv.countNonZero(debug)
+);    
+    
     saveMat(debug, "crop_input.png");
     cropDebugSaved = true;
 }
