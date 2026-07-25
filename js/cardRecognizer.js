@@ -50,6 +50,22 @@ cv.threshold(
     cv.THRESH_BINARY_INV
 );
 
+let min = 255;
+let max = 0;
+
+for (let y = 0; y < gray.rows; y++)
+{
+    for (let x = 0; x < gray.cols; x++)
+    {
+        const p = gray.ucharPtr(y, x)[0];
+
+        if (p < min) min = p;
+        if (p > max) max = p;
+    }
+}
+
+console.log("Gray range:", min, max);
+    
 console.log(
     "Binary corner pixels:",
     binary.ucharPtr(0,0)[0],
