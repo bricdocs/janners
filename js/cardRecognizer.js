@@ -50,25 +50,6 @@ cv.threshold(
     cv.THRESH_BINARY_INV
 );
 
-const kernel = cv.Mat.ones(3, 3, cv.CV_8U);
-
-// küçük beyaz noktaları temizle
-cv.morphologyEx(
-    binary,
-    binary,
-    cv.MORPH_OPEN,
-    kernel
-);
-
-// karakteri biraz kalınlaştır
-cv.dilate(
-    binary,
-    binary,
-    kernel
-);
-
-kernel.delete();
-    
 console.log(
     "Binary corner pixels:",
     binary.ucharPtr(0,0)[0],
