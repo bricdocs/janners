@@ -77,20 +77,6 @@ console.log(
     binary.ucharPtr(binary.rows-1,binary.cols-1)[0]
 );
     
-const kernel = cv.Mat.ones(
-    3,
-    3,
-    cv.CV_8U
-);
-
-//cv.morphologyEx(
-//    binary,
-//    binary,
-//    cv.MORPH_CLOSE,
-//    kernel
-//);
-
-kernel.delete();
 
     // 6- Sonucu göster
     cv.imshow("binaryCanvas", binary);
