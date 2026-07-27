@@ -224,6 +224,12 @@ function matchTemplate(img, templates)
             img.copyTo(input);
         }
 
+    // DEBUG: Gerçek runtime Mat
+    saveMat(input, "runtime_match.png");
+
+    // DEBUG: Gerçek template Mat
+    saveMat(tpl, "template_match.png");        
+        
         const result = new cv.Mat();
 
 console.log(
