@@ -225,10 +225,10 @@ function matchTemplate(img, templates)
         }
 
     // DEBUG: Gerçek runtime Mat
-    saveMat(input, "runtime_match.png");
+    //saveMat(input, "runtime_match.png");
 
     // DEBUG: Gerçek template Mat
-    saveMat(tpl, "template_match.png");        
+    //saveMat(tpl, "template_match.png");        
         
         const result = new cv.Mat();
 
