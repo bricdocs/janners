@@ -232,13 +232,13 @@ console.log(
             img.copyTo(input);
         }
 
-if (!matchDebugSaved)
-{
-    matchDebugSaved = true;
+// if (!matchDebugSaved)
+// {
+//     matchDebugSaved = true;
 
-    saveMat(input, "runtime_match.png");
-    saveMat(tpl, "template_match.png");
-}
+//     saveMat(input, "runtime_match.png");
+//     saveMat(tpl, "template_match.png");
+// }
         
         const result = new cv.Mat();
 
