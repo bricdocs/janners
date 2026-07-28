@@ -3,6 +3,7 @@
  Version 1.0
 =====================================================*/
 
+let debugCapture = false;
 let runtimeSaved = false;
 let DebugImages = {
     source: null,
