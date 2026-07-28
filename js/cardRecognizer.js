@@ -332,20 +332,37 @@ DebugImages.rankAfter =
 
 function saveMat(mat, fileName)
 {
+    console.log("====================================");
+    console.log("saveMat()");
+    console.log("File      :", fileName);
+    console.log("Size      :", mat.cols, "x", mat.rows);
+    console.log("Channels  :", mat.channels());
+    console.log("Type      :", mat.type());
+    console.log("Depth     :", mat.depth());
+    console.log("NonZero   :", cv.countNonZero(mat));
+
     const canvas = document.createElement("canvas");
 
     cv.imshow(canvas, mat);
 
-console.log(
-    "Canvas:",
-    canvas.width,
-    canvas.height
-);
-    
+    console.log(
+        "Canvas    :",
+        canvas.width,
+        "x",
+        canvas.height
+    );
+
     const link = document.createElement("a");
 
     link.download = fileName;
     link.href = canvas.toDataURL("image/png");
+
+    console.log(
+        "DataURL len:",
+        link.href.length
+    );
+
+    console.log("====================================");
 
     link.click();
 }
