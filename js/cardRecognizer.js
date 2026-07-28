@@ -336,6 +336,12 @@ function saveMat(mat, fileName)
 
     cv.imshow(canvas, mat);
 
+console.log(
+    "Canvas:",
+    canvas.width,
+    canvas.height
+);
+    
     const link = document.createElement("a");
 
     link.download = fileName;
