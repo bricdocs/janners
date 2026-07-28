@@ -3,6 +3,7 @@
  Version 1.0
 =====================================================*/
 
+let runtimeSaved = false;
 let DebugImages = {
     source: null,
     warp: null,
@@ -74,6 +75,12 @@ console.log(
     rankCrop.rows
 );
 
+if (!runtimeSaved)
+{
+    saveMat(rankCrop, "runtime.png");
+    runtimeSaved = true;
+}
+ 
 console.log(
     "Runtime White:",
     cv.countNonZero(rankCrop)
