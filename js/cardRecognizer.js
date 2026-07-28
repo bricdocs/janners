@@ -50,7 +50,7 @@ console.log(
     roi.empty()
 );
     
-//saveMat(roi, "01_roi.png");    
+saveMat(roi, "01_roi.png");    
     
     // 4- Gray
     const gray = new cv.Mat();
@@ -360,7 +360,7 @@ function saveMat(mat, fileName)
     console.log("Channels  :", mat.channels());
     console.log("Type      :", mat.type());
     console.log("Depth     :", mat.depth());
-    console.log("NonZero   :", cv.countNonZero(mat));
+    //console.log("NonZero   :", cv.countNonZero(mat));
 
     const canvas = document.createElement("canvas");
 
