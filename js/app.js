@@ -55,6 +55,8 @@ DebugImages.source = canvas;
 
         const src = cv.imread(canvas);
 
+window.DEBUG_CAPTURE = debugCapture;
+     
         const quad = detectCard(src);
 
 if (quad) {
@@ -126,6 +128,8 @@ warped.delete();
 
         src.delete();
 
+debugCapture = false;
+     
         requestAnimationFrame(loop);
     }
 
