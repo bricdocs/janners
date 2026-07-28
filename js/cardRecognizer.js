@@ -116,6 +116,8 @@ const rank = binary.roi(rankRect);
 
 cv.imshow("rankCanvas", rank);
 
+saveMat(rank, "04_rank.png");
+    
 let black = 0;
 let white = 0;
 
