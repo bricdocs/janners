@@ -224,7 +224,7 @@ console.log(
                 new cv.Size(tpl.cols, tpl.rows),
                 0,
                 0,
-                cv.INTER_AREA
+                cv.INTER_NEAREST
             );
         }
         else
