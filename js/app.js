@@ -129,6 +129,16 @@ warped.delete();
         requestAnimationFrame(loop);
     }
 
+document
+    .getElementById("debugBtn")
+    .onclick = function ()
+{
+    debugCapture = true;
+
+    console.log("DEBUG BUTTON");
+};
+
+ 
     loop();
 
     console.log("CARD DETECTOR MODE");
