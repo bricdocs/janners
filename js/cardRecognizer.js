@@ -203,7 +203,7 @@ console.log(
     cv.countNonZero(debug)
 );    
     
-    saveMat(debug, "crop_input.png");
+    saveMat(debug, "05_crop_input.png");
     cropDebugSaved = true;
 }
 
