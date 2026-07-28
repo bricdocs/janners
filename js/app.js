@@ -74,7 +74,10 @@ console.log(
     rankCrop.rows
 );
 
-//saveMat(rankCrop, "runtime.png");
+console.log(
+    "Runtime White:",
+    cv.countNonZero(rankCrop)
+);
  
 const rankResult =
 matchTemplate(rankCrop, Templates.ranks);
