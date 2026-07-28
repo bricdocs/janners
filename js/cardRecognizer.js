@@ -73,6 +73,8 @@ cv.threshold(
     cv.THRESH_BINARY_INV
 );
 
+saveMat(binary, "03_binary.png");
+    
 console.log(
     "Binary corner pixels:",
     binary.ucharPtr(0,0)[0],
