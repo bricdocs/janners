@@ -229,17 +229,51 @@ console.log(
 // Beyaz piksel arama
 //----------------------------------
 
+console.log("----- Row Analysis -----");
+
 for (let y = 0; y < src.rows; y++)
 {
-    let row = "";
+    let first = -1;
+    let last  = -1;
 
     for (let x = 0; x < src.cols; x++)
     {
-        row += (src.ucharPtr(y,x)[0] == 255) ? "." : "#";
+        if (src.ucharPtr(y,x)[0] == 255)
+        {
+            if (first == -1)
+                first = x;
+
+            last = x;
+        }
     }
 
-    console.log(row);
+    if (first != -1)
+    {
+        console.log(
+            "Row",
+            y,
+            ": first =",
+            first,
+            "last =",
+            last
+        );
+    }
 }
+
+console.log("------------------------");
+    
+    
+// for (let y = 0; y < src.rows; y++)
+// {
+//     let row = "";
+
+//     for (let x = 0; x < src.cols; x++)
+//     {
+//         row += (src.ucharPtr(y,x)[0] == 255) ? "." : "#";
+//     }
+
+//     console.log(row);
+// }
     
     
     for(let y=0; y<src.rows; y++)
