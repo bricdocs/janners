@@ -4,7 +4,7 @@
  *=========================================*/
 
 let matchDebugSaved = false;
-
+let templateSaved = false;
 const Templates = {
 
     ranks: {},
@@ -232,13 +232,13 @@ console.log(
             img.copyTo(input);
         }
 
-// if (!matchDebugSaved)
-// {
-//     matchDebugSaved = true;
+if (!matchDebugSaved)
+{
+    matchDebugSaved = true;
 
-//     saveMat(input, "runtime_match.png");
-//     saveMat(tpl, "template_match.png");
-// }
+    saveMat(input, "runtime_match.png");
+    saveMat(tpl, "template_match.png");
+}
         
         const result = new cv.Mat();
 
@@ -255,6 +255,15 @@ console.log(
     tpl.rows,
     tpl.type()
 );
+
+if (!templateSaved)
+{
+    saveMat(input, "runtime_match.png");
+    saveMat(tpl, "template_match.png");
+
+    templateSaved = true;
+}
+
         
         cv.matchTemplate(
             input,
