@@ -185,6 +185,12 @@ function matchTemplate(img, templates)
     {
         const tpl = templates[name];
 
+console.log(
+    "Template White:",
+    name,
+    cv.countNonZero(tpl)
+);
+        
         console.log(
             "Template:",
             name,
