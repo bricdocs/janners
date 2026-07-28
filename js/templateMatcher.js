@@ -3,6 +3,8 @@
  * Version 1.0
  *=========================================*/
 
+let matchDebugSaved = false;
+
 const Templates = {
 
     ranks: {},
@@ -224,6 +226,14 @@ function matchTemplate(img, templates)
             img.copyTo(input);
         }
 
+if (!matchDebugSaved)
+{
+    matchDebugSaved = true;
+
+    saveMat(input, "runtime_match.png");
+    saveMat(tpl, "template_match.png");
+}
+        
         const result = new cv.Mat();
 
 console.log(
