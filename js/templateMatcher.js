@@ -4,7 +4,7 @@
  *=========================================*/
 
 let matchDebugSaved = false;
-let templateSaved = false;
+
 const Templates = {
 
     ranks: {},
@@ -256,15 +256,7 @@ console.log(
     tpl.type()
 );
 
-if (!templateSaved)
-{
-    saveMat(input, "runtime_match.png");
-    saveMat(tpl, "template_match.png");
-
-    templateSaved = true;
-}
-
-        
+       
         cv.matchTemplate(
             input,
             tpl,
