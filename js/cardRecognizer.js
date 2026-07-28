@@ -27,11 +27,30 @@ const h = Math.round(card.rows * 0.24);
     cv.imshow("warpCanvas", card);
 
     // 3- Daha sonra ROI'yi al
+
+console.log(
+    "Card:",
+    card.cols,
+    card.rows
+);
     const roi = card.roi(
         new cv.Rect(x, y, w, h)
     );
 
-saveMat(roi, "01_roi.png");    
+console.log(
+    "ROI:",
+    roi.cols,
+    roi.rows,
+    roi.type(),
+    roi.channels()
+);
+
+console.log(
+    "Empty:",
+    roi.empty()
+);
+    
+//saveMat(roi, "01_roi.png");    
     
     // 4- Gray
     const gray = new cv.Mat();
