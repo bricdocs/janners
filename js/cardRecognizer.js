@@ -55,6 +55,8 @@ saveMat(roi, "01_roi.png");
     // 4- Gray
     const gray = new cv.Mat();
     cv.cvtColor(roi, gray, cv.COLOR_RGBA2GRAY);
+saveMat(gray, "02_gray.png");
+    
 cv.imshow("binaryCanvas", gray);
 
 DebugImages.gray =
