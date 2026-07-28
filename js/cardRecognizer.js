@@ -31,6 +31,8 @@ const h = Math.round(card.rows * 0.24);
         new cv.Rect(x, y, w, h)
     );
 
+saveMat(roi, "01_roi.png");    
+    
     // 4- Gray
     const gray = new cv.Mat();
     cv.cvtColor(roi, gray, cv.COLOR_RGBA2GRAY);
