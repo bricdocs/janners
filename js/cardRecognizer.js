@@ -192,19 +192,17 @@ const debug = src.clone();
 
 cv.imshow("rankCanvas", debug);
 
-if (!cropDebugSaved)
+if (window.DEBUG_CAPTURE)
 {
+    console.log(
+        "SaveMat:",
+        debug.cols,
+        debug.rows,
+        "NonZero =",
+        cv.countNonZero(debug)
+    );
 
-console.log(
-    "SaveMat:",
-    debug.cols,
-    debug.rows,
-    "NonZero =",
-    cv.countNonZero(debug)
-);    
-    
     saveMat(debug, "05_crop_input.png");
-    cropDebugSaved = true;
 }
 
 debug.delete();    
