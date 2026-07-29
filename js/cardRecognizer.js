@@ -359,6 +359,10 @@ DebugImages.rankAfter =
 
 function saveMat(mat, fileName)
 {
+
+if (!window.DEBUG_CAPTURE)
+    return;
+    
     console.log("====================================");
     console.log("saveMat()");
     console.log("File      :", fileName);
