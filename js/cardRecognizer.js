@@ -165,6 +165,51 @@ const rank = binary.roi(rankRect);
 cv.imshow("rankCanvas", rank);
 
 saveMat(rank, "04_rank.png");
+
+//----------------------------------
+// Contour Debug
+//----------------------------------
+
+const contours = new cv.MatVector();
+const hierarchy = new cv.Mat();
+
+cv.findContours(
+    rank,
+    contours,
+    hierarchy,
+    cv.RETR_EXTERNAL,
+    cv.CHAIN_APPROX_SIMPLE
+);
+
+console.log(
+    "[F" + window.frameId + "]",
+    "Contours:",
+    contours.size()
+);
+
+for (let i = 0; i < contours.size(); i++)
+{
+    const contour = contours.get(i);
+
+    const rect = cv.boundingRect(contour);
+
+    console.log(
+        "[F" + window.frameId + "]",
+        "Contour",
+        i,
+        ":",
+        "x=", rect.x,
+        "y=", rect.y,
+        "w=", rect.width,
+        "h=", rect.height
+    );
+
+    contour.delete();
+}
+
+hierarchy.delete();
+contours.delete();
+
     
 let black = 0;
 let white = 0;
