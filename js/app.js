@@ -10,6 +10,8 @@ window.GOOD_SCORE = 70;
 window.BAD_SCORE  = 40;
 window.scoreTag = 0;
 
+window.frameId = 0;
+
 let DebugImages = {
     source: null,
     warp: null,
