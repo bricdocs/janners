@@ -5,10 +5,10 @@
 
 let debugCapture = false;
 let runtimeSaved = false;
-const GOOD_SCORE = 0.70;
-const BAD_SCORE  = 0.40;
 
-let scoreTag = 0;
+window.GOOD_SCORE = 70;
+window.BAD_SCORE  = 40;
+window.scoreTag = 0;
 
 let DebugImages = {
     source: null,
@@ -105,7 +105,7 @@ console.log(
     rankResult.score
 );
 
-scoreTag = Math.round(rankResult.score * 100);
+window.scoreTag = Math.round(rankResult.score * 100);
  
 // Şimdilik sadece test
 console.log(
