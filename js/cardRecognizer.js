@@ -387,8 +387,14 @@ DebugImages.rankAfter =
 function saveMat(mat, fileName)
 {
 
-if (!window.DEBUG_CAPTURE)
+const autoSave =
+    window.scoreTag >= window.GOOD_SCORE ||
+    window.scoreTag <= window.BAD_SCORE;
+
+if (!window.DEBUG_CAPTURE && !autoSave)
+{
     return;
+}
     
     console.log("====================================");
     console.log("saveMat()");
