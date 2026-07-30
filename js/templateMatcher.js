@@ -143,11 +143,12 @@ function recognizeRank(rank)
         }
     }
 
-    console.log(
-        "Rank:",
-        bestName,
-        bestScore
-    );
+console.log(
+    "[F" + window.frameId + "]",
+    "Rank:",
+    bestName,
+    bestScore
+);
 
     return bestName;
 }
