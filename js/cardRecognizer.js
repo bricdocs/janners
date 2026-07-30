@@ -123,7 +123,7 @@ const rankRect = new cv.Rect(
     0,
     0,
     binary.cols,
-    Math.floor(binary.rows * 0.45)
+    Math.floor(binary.rows * 0.50)
 );
 
 const rank = binary.roi(rankRect);
