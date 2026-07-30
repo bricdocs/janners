@@ -65,6 +65,21 @@ DebugImages.gray =
     // 5- Binary
 const binary = new cv.Mat();
 
+let minVal = { value: 0 };
+let maxVal = { value: 0 };
+
+cv.minMaxLoc(
+    gray,
+    minVal,
+    maxVal
+);
+
+console.log(
+    "Gray Min/Max:",
+    minVal.value,
+    maxVal.value
+);
+    
 cv.threshold(
     gray,
     binary,
