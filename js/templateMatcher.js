@@ -125,6 +125,8 @@ function compareBinary(img1, img2)
 
 function recognizeRank(rank)
 {
+console.log("XXXXXXXX templateMatcher.js >> recognizeRank XXXXXXXX");
+    
     let bestName = "";
     let bestScore = 0;
 
