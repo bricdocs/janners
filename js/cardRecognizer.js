@@ -7,6 +7,15 @@ let cropDebugSaved = false;
 
 function preprocessCorner(card)
 {
+
+window.frameId++;
+
+console.log("");
+console.log("====================================");
+console.log("FRAME:", window.frameId);
+console.log("====================================");
+    
+    
 // Kart boyutuna göre ROI
 const x = Math.round(card.cols * 0.02);
 const y = Math.round(card.rows * 0.02);
@@ -131,7 +140,14 @@ for (let y = 0; y < binary.rows; y++)
             count++;
     }
 
-    console.log("Row", y, "=", count);
+    console.log(
+    "[F" + window.frameId + "]",
+    "Row",
+    y,
+    "=",
+    count
+);
+    
 }
 
 console.log("---------------------------");
