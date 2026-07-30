@@ -275,6 +275,7 @@ console.log(
         const mm = cv.minMaxLoc(result);
 
         console.log(
+            "[F" + window.frameId + "]",            
             "Score:",
             name,
             mm.maxVal
