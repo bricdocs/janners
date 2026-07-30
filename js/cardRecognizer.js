@@ -119,6 +119,24 @@ kernel.delete();
 // Rank ROI
 //----------------------------------
 
+console.log("----- Row White Count -----");
+
+for (let y = 0; y < binary.rows; y++)
+{
+    let count = 0;
+
+    for (let x = 0; x < binary.cols; x++)
+    {
+        if (binary.ucharPtr(y, x)[0] == 255)
+            count++;
+    }
+
+    console.log("Row", y, "=", count);
+}
+
+console.log("---------------------------");
+
+    
 const rankRect = new cv.Rect(
     0,
     0,
