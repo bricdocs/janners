@@ -82,6 +82,11 @@ cv.threshold(
     cv.THRESH_BINARY_INV
 );
 
+console.log(
+    "Binary White:",
+    cv.countNonZero(binary)
+);
+    
 saveMat(binary, "03_binary.png");
     
 console.log(
