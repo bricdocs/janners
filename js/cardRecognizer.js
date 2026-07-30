@@ -418,7 +418,21 @@ if (!window.DEBUG_CAPTURE && !autoSave)
 
     const link = document.createElement("a");
 
-    link.download = fileName;
+const dot = fileName.lastIndexOf(".");
+
+let saveName = fileName;
+
+if (dot !== -1)
+{
+    saveName =
+        fileName.substring(0, dot) +
+        "_" +
+        window.scoreTag +
+        fileName.substring(dot);
+}
+
+link.download = saveName;
+  
     link.href = canvas.toDataURL("image/png");
 
     console.log(
