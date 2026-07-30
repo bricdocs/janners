@@ -102,6 +102,7 @@ matchTemplate(rankCrop, Templates.ranks);
 rankCrop.delete();
 
 console.log(
+    "[F" + window.frameId + "]",
     "Rank Match:",
     rankResult.name,
     rankResult.score
