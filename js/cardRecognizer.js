@@ -373,6 +373,7 @@ console.log("------------------------");
         return src.clone();
 
 console.log(
+    "[F" + window.frameId + "]",
     "Bounds:",
     minX,
     minY,
