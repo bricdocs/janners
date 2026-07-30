@@ -331,6 +331,21 @@ console.log(
     maxX,
     maxY
 );
+
+console.log(
+    "Crop Size:",
+    maxX - minX + 1,
+    "x",
+    maxY - minY + 1
+);
+
+console.log(
+    "Margins:",
+    "L=", minX,
+    "R=", src.cols - 1 - maxX,
+    "T=", minY,
+    "B=", src.rows - 1 - maxY
+);
     
     const rect = new cv.Rect(
         minX,
