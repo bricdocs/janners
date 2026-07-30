@@ -20,6 +20,15 @@ async function loadTemplates() {
     Templates.ranks["AH"] =
         await loadImageMat("templates/ranks/AH.png");
 
+if (window.DEBUG_CAPTURE)
+{
+    saveMat(
+        Templates.ranks["AH"],
+        "08_loaded_template.png"
+    );
+}
+
+    
     Templates.suits["H"] =
         await loadImageMat("templates/suits/H.png");
 
