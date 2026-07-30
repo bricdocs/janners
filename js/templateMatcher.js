@@ -276,12 +276,13 @@ console.log(
 
         const mm = cv.minMaxLoc(result);
 
-        console.log(
-            "[F" + window.frameId + "]",            
-            "Score:",
-            name,
-            mm.maxVal
-        );
+console.log(
+    "[F" + window.frameId + "]",
+    "[" + img.cols + "x" + img.rows + "]",
+    "Score:",
+    name,
+    mm.maxVal.toFixed(3)
+);
 
         if (mm.maxVal > bestScore)
         {
