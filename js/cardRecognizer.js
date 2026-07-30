@@ -382,6 +382,7 @@ console.log(
 );
 
 console.log(
+    "[F" + window.frameId + "]",
     "Crop Size:",
     maxX - minX + 1,
     "x",
