@@ -453,6 +453,27 @@ console.log(
     maxY
 );
 
+//----------------------------------
+// Padding
+//----------------------------------
+
+const PAD = 1;
+
+minX = Math.max(0, minX - PAD);
+minY = Math.max(0, minY - PAD);
+
+maxX = Math.min(src.cols - 1, maxX + PAD);
+maxY = Math.min(src.rows - 1, maxY + PAD);
+
+console.log(
+    "[F" + window.frameId + "]",
+    "Bounds + PAD:",
+    minX,
+    minY,
+    maxX,
+    maxY
+);
+    
 console.log(
     "[F" + window.frameId + "]",
     "Crop Size:",
