@@ -233,9 +233,6 @@ if (largestRect)
     );
 }
 
-hierarchy.delete();
-contours.delete();
-
     
 let black = 0;
 let white = 0;
@@ -419,30 +416,23 @@ console.log("------------------------");
 
 //     console.log(row);
 // }
+
     
+if (!largestRect)
+{
+    hierarchy.delete();
+    contours.delete();
+
+    return src.clone();
+}
+
+let minX = largestRect.x;
+let minY = largestRect.y;
+
+let maxX = largestRect.x + largestRect.width  - 1;
+let maxY = largestRect.y + largestRect.height - 1;    
+
     
-    for(let y=0; y<src.rows; y++)
-    {
-        for(let x=0; x<src.cols; x++)
-        {
-            const value = src.ucharPtr(y,x)[0];
-
-            if(x==10 && y==10)
-                console.log("Pixel =", value);
-
-            if(value==255)
-            {
-                if(x<minX) minX=x;
-                if(y<minY) minY=y;
-
-                if(x>maxX) maxX=x;
-                if(y>maxY) maxY=y;
-            }
-        }
-    }
-
-    if(maxX<=minX || maxY<=minY)
-        return src.clone();
 
 console.log(
     "[F" + window.frameId + "]",
@@ -499,6 +489,9 @@ console.log(
 
     const crop = src.roi(rect).clone();
 
+hierarchy.delete();
+contours.delete();    
+    
 cv.imshow("rankCanvas", crop);
 
 DebugImages.rankAfter =
