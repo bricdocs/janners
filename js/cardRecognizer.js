@@ -187,11 +187,17 @@ console.log(
     contours.size()
 );
 
+let largestRect = null;
+let largestArea = 0;
+
 for (let i = 0; i < contours.size(); i++)
 {
     const contour = contours.get(i);
 
     const rect = cv.boundingRect(contour);
+
+    const area =
+        rect.width * rect.height;
 
     console.log(
         "[F" + window.frameId + "]",
@@ -201,10 +207,30 @@ for (let i = 0; i < contours.size(); i++)
         "x=", rect.x,
         "y=", rect.y,
         "w=", rect.width,
-        "h=", rect.height
+        "h=", rect.height,
+        "area=", area
     );
 
+    if (area > largestArea)
+    {
+        largestArea = area;
+        largestRect = rect;
+    }
+
     contour.delete();
+}
+
+if (largestRect)
+{
+    console.log(
+        "[F" + window.frameId + "]",
+        "Largest:",
+        "x=", largestRect.x,
+        "y=", largestRect.y,
+        "w=", largestRect.width,
+        "h=", largestRect.height,
+        "area=", largestArea
+    );
 }
 
 hierarchy.delete();
@@ -264,7 +290,8 @@ gray.delete();
 return {
     binary,
     rank,
-    suit
+    suit,
+    rankRect: largestRect
 };
     
 }
