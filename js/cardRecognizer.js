@@ -398,23 +398,6 @@ for (let y = 0; y < src.rows; y++)
 }
 
 console.log("------------------------");
-  
-    
-if (!largestRect)
-{
-    hierarchy.delete();
-    contours.delete();
-
-    return src.clone();
-}
-
-let minX = largestRect.x;
-let minY = largestRect.y;
-
-let maxX = largestRect.x + largestRect.width  - 1;
-let maxY = largestRect.y + largestRect.height - 1;    
-
-    
 
 console.log(
     "[F" + window.frameId + "]",
