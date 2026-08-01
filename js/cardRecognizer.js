@@ -115,7 +115,7 @@ const kernel = cv.Mat.ones(
 cv.morphologyEx(
     binary,
     binary,
-    cv.MORPH_OPEN,
+    cv.MORPH_CLOSE,
     kernel
 );
 
