@@ -111,6 +111,9 @@ if (!runtimeSaved)
  
 const whitePixels = cv.countNonZero(rankCrop);
 
+const cropWidth  = rankCrop.cols;
+const cropHeight = rankCrop.rows;
+ 
 console.log(
     "Runtime White:",
     whitePixels
@@ -185,8 +188,12 @@ if (rankResult.score > window.bestMatch.score)
     window.bestMatch.score  = rankResult.score;
     window.bestMatch.name   = rankResult.name;
     window.bestMatch.frame  = window.frameId;
-    window.bestMatch.width  = rankCrop.cols;
-    window.bestMatch.height = rankCrop.rows;
+
+window.bestMatch.width  = cropWidth;
+window.bestMatch.height = cropHeight;
+ 
+    // window.bestMatch.width  = rankCrop.cols;
+    // window.bestMatch.height = rankCrop.rows;
     window.bestMatch.white  = whitePixels;
 
     console.log(
