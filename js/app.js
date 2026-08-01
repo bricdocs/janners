@@ -197,6 +197,11 @@ document
     console.log("DEBUG BUTTON");
 };
 
+
+document
+    .getElementById("downloadScoreLog")
+    .onclick = downloadScoreLog;
+ 
  
     loop();
 
