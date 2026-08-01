@@ -138,11 +138,16 @@ if (window.DEBUG_SCORE_LOG)
     else
         scoreStats.b00++;
 
-    scoreLog +=
-        "F" + window.frameId + "," +
-        rankResult.name + "," +
-        s.toFixed(3) + "," +
-        rankCrop.cols + "x" + rankCrop.rows + "\n";
+const whitePixels =
+    cv.countNonZero(rankCrop);
+
+scoreLog +=
+    "F" + window.frameId + "," +
+    rankResult.name + "," +
+    s.toFixed(3) + "," +
+    rankCrop.cols + "x" + rankCrop.rows + "," +
+    whitePixels + "\n";
+ 
 }
  
 rankCrop.delete();
