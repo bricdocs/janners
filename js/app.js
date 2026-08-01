@@ -152,15 +152,7 @@ scoreLog +=
     whitePixels + "\n";
  
 }
- 
-rankCrop.delete();
 
-console.log(
-    "[F" + window.frameId + "]",
-    "Rank Match:",
-    rankResult.name,
-    rankResult.score
-);
 
 window.scoreTag = Math.round(rankResult.score * 100);
 
@@ -205,9 +197,19 @@ window.bestMatch.height = cropHeight;
         "White:",
         window.bestMatch.white
     );
-}
+} 
+
+
  
- 
+rankCrop.delete();
+
+console.log(
+    "[F" + window.frameId + "]",
+    "Rank Match:",
+    rankResult.name,
+    rankResult.score
+);
+
  
 // Şimdilik sadece test
 console.log(
