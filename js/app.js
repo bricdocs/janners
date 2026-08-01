@@ -229,3 +229,48 @@ function saveDebugImages()
 
     console.log("Debug PNG saved.");
 }
+
+function downloadScoreLog()
+{
+    let text = "";
+
+    text += "===== SUMMARY =====\n\n";
+
+    text += "Frames : " + scoreStats.total + "\n\n";
+
+    text += "0.90-1.00 : " + scoreStats.b90 + "\n";
+    text += "0.80-0.89 : " + scoreStats.b80 + "\n";
+    text += "0.70-0.79 : " + scoreStats.b70 + "\n";
+    text += "0.60-0.69 : " + scoreStats.b60 + "\n";
+    text += "0.50-0.59 : " + scoreStats.b50 + "\n";
+    text += "0.40-0.49 : " + scoreStats.b40 + "\n";
+    text += "0.00-0.39 : " + scoreStats.b00 + "\n\n";
+
+    text += "===== DETAIL =====\n\n";
+
+    text += scoreLog;
+
+    const blob =
+        new Blob(
+            [text],
+            { type: "text/plain" }
+        );
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    a.href = url;
+
+    a.download = "scorelog.txt";
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    document.body.removeChild(a);
+
+    URL.revokeObjectURL(url);
+}
