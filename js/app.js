@@ -178,7 +178,7 @@ if (!window.bestMatch)
     };
 }
 
-const whitePixels = cv.countNonZero(rankCrop);
+//const whitePixels = cv.countNonZero(rankCrop);
 
 if (rankResult.score > window.bestMatch.score)
 {
