@@ -140,8 +140,6 @@ if (window.DEBUG_SCORE_LOG)
     else
         scoreStats.b00++;
 
-const whitePixels =
-    cv.countNonZero(rankCrop);
 
 scoreLog +=
     "F" + window.frameId + "," +
