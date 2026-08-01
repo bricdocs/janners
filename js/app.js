@@ -109,9 +109,11 @@ if (!runtimeSaved)
     runtimeSaved = true;
 }
  
+const whitePixels = cv.countNonZero(rankCrop);
+
 console.log(
     "Runtime White:",
-    cv.countNonZero(rankCrop)
+    whitePixels
 );
  
 const rankResult =
@@ -160,6 +162,47 @@ console.log(
 );
 
 window.scoreTag = Math.round(rankResult.score * 100);
+
+//----------------------------------
+// Best Match Tracker
+//----------------------------------
+
+if (!window.bestMatch)
+{
+    window.bestMatch =
+    {
+        score: -1,
+        name: "",
+        frame: 0,
+        width: 0,
+        height: 0,
+        white: 0
+    };
+}
+
+const whitePixels = cv.countNonZero(rankCrop);
+
+if (rankResult.score > window.bestMatch.score)
+{
+    window.bestMatch.score  = rankResult.score;
+    window.bestMatch.name   = rankResult.name;
+    window.bestMatch.frame  = window.frameId;
+    window.bestMatch.width  = rankCrop.cols;
+    window.bestMatch.height = rankCrop.rows;
+    window.bestMatch.white  = whitePixels;
+
+    console.log(
+        "NEW BEST >>>",
+        "F" + window.bestMatch.frame,
+        window.bestMatch.name,
+        window.bestMatch.score.toFixed(3),
+        window.bestMatch.width + "x" + window.bestMatch.height,
+        "White:",
+        window.bestMatch.white
+    );
+}
+ 
+ 
  
 // Şimdilik sadece test
 console.log(
