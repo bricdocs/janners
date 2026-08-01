@@ -3,6 +3,24 @@
  Version 1.0
 =====================================================*/
 
+window.DEBUG_SCORE_LOG = true;
+
+let scoreLog = "";
+
+let scoreStats =
+{
+    total: 0,
+
+    b90: 0,
+    b80: 0,
+    b70: 0,
+    b60: 0,
+    b50: 0,
+    b40: 0,
+    b00: 0
+};
+
+
 let debugCapture = false;
 let runtimeSaved = false;
 
@@ -99,6 +117,34 @@ console.log(
 const rankResult =
 matchTemplate(rankCrop, Templates.ranks);
 
+if (window.DEBUG_SCORE_LOG)
+{
+    const s = rankResult.score;
+
+    scoreStats.total++;
+
+    if (s >= 0.90)
+        scoreStats.b90++;
+    else if (s >= 0.80)
+        scoreStats.b80++;
+    else if (s >= 0.70)
+        scoreStats.b70++;
+    else if (s >= 0.60)
+        scoreStats.b60++;
+    else if (s >= 0.50)
+        scoreStats.b50++;
+    else if (s >= 0.40)
+        scoreStats.b40++;
+    else
+        scoreStats.b00++;
+
+    scoreLog +=
+        "F" + window.frameId + "," +
+        rankResult.name + "," +
+        s.toFixed(3) + "," +
+        rankCrop.cols + "x" + rankCrop.rows + "\n";
+}
+ 
 rankCrop.delete();
 
 console.log(
