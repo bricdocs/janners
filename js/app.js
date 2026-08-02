@@ -71,6 +71,23 @@ window.onload = async function () {
             return;
         }
 
+    // ============================
+    // FPS LIMIT
+    // ============================
+
+    const now = performance.now();
+
+    if (now - window.lastProcessTime < window.PROCESS_INTERVAL)
+    {
+        requestAnimationFrame(loop);
+        return;
+    }
+
+    window.lastProcessTime = now;
+
+    // ============================
+
+     
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
 
