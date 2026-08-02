@@ -3,6 +3,16 @@
  Version 1.0
 =====================================================*/
 
+window.bestCapture =
+{
+    roi: null,
+    gray: null,
+    binary: null,
+    rank: null,
+    runtime: null,
+    template: null
+};
+
 window.DEBUG_SCORE_LOG = true;
 
 let scoreLog = "";
