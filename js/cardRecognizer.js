@@ -567,6 +567,9 @@ function saveBestMat(name, mat)
 
 function downloadBestImages()
 {
+console.log("Download Best");
+console.log(window.bestImages);
+    
     for (const name in window.bestImages)
     {
         saveMat(window.bestImages[name], name);
