@@ -197,3 +197,156 @@ button{
     }
 
 } */
+
+/*=========================================
+  Jannersten Panel Layout
+=========================================*/
+
+html,
+body{
+    width:100%;
+    min-height:100%;
+    height:auto;
+
+    overflow-x:hidden;
+    overflow-y:auto;
+
+    background:#202020;
+}
+
+/*----------------------------------
+  Camera Panel
+----------------------------------*/
+
+#cameraPanel{
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:8px;
+}
+
+#cameraPanel #canvas{
+    display:block;
+
+    width:min(95vw, 640px);
+    height:auto;
+
+    margin:0;
+
+    border:2px solid #707070;
+    background:#000;
+}
+
+/*----------------------------------
+  Debug Canvas Panel
+----------------------------------*/
+
+#debugPanel{
+    width:min(96vw, 900px);
+
+    display:grid;
+    grid-template-columns:repeat(6, minmax(0, 1fr));
+
+    gap:6px;
+
+    margin:8px auto;
+    padding:6px;
+}
+
+#debugPanel canvas{
+    display:block;
+
+    width:100%;
+    height:auto;
+
+    margin:0;
+
+    border:1px solid #707070;
+    background:#fff;
+}
+
+/*----------------------------------
+  Button Panel
+----------------------------------*/
+
+#buttonPanel{
+    width:min(96vw, 900px);
+
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+
+    gap:6px;
+
+    margin:8px auto 20px;
+    padding:6px;
+}
+
+#buttonPanel button{
+    margin:0;
+    padding:8px 14px;
+
+    font-size:14px;
+    cursor:pointer;
+}
+
+/*=========================================
+  Mobile Layout
+=========================================*/
+
+@media (max-width:768px)
+{
+    #cameraPanel{
+        padding:4px;
+    }
+
+    #cameraPanel #canvas{
+        width:96vw;
+        max-height:38vh;
+
+        object-fit:contain;
+    }
+
+    #debugPanel{
+        width:96vw;
+
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+
+        gap:5px;
+
+        margin:5px auto;
+        padding:4px;
+    }
+
+    #debugPanel canvas{
+        width:100%;
+        max-height:22vh;
+
+        object-fit:contain;
+    }
+
+    #buttonPanel{
+        width:96vw;
+
+        display:grid;
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+
+        gap:6px;
+
+        margin:6px auto 16px;
+        padding:4px;
+    }
+
+    #buttonPanel button{
+        width:100%;
+
+        padding:9px 5px;
+
+        font-size:13px;
+    }
+}
+
+
