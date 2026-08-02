@@ -525,3 +525,32 @@ link.download = saveName;
 
     link.click();
 }
+
+//----------------------------------
+// Best Image Storage
+//----------------------------------
+
+window.bestImages = {};
+
+function cloneMat(mat)
+{
+    return mat.clone();
+}
+
+function saveBestMat(name, mat)
+{
+    if (window.bestImages[name])
+    {
+        window.bestImages[name].delete();
+    }
+
+    window.bestImages[name] = cloneMat(mat);
+}
+
+function downloadBestImages()
+{
+    for (const name in window.bestImages)
+    {
+        saveMat(window.bestImages[name], name);
+    }
+}
