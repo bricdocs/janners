@@ -258,6 +258,15 @@ cv.imshow("suitCanvas", suit);
 DebugImages.suit =
     document.getElementById("suitCanvas");    
 
+//----------------------------------
+// Best Images Candidate
+//----------------------------------
+
+saveBestMat("01_roi.png", roi);
+saveBestMat("02_gray.png", gray);
+saveBestMat("03_binary.png", binary);
+saveBestMat("04_rank.png", rank);
+    
 // Artık binary silinmeyecek.
 // rank ve suit de silinmeyecek.
 // Bunları çağıran fonksiyon kullanacak.
