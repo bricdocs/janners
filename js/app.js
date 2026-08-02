@@ -39,6 +39,9 @@ window.GOOD_SCORE = 70;
 window.BAD_SCORE  = 40;
 window.scoreTag = 0;
 
+window.PROCESS_INTERVAL = 66;      // yaklaşık 15 FPS
+window.lastProcessTime = 0;
+
 window.frameId = 0;
 
 let DebugImages = {
