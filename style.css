@@ -328,14 +328,14 @@ body{
     padding:4px;
 }
 
-#debugPanel canvas{
+/* #debugPanel canvas{
 
     /* width:100px;
 
     height:auto; */
 
     margin:2px;
-}
+} */
 
     #buttonPanel{
         width:96vw;
