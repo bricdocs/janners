@@ -287,6 +287,11 @@ document
 document
     .getElementById("downloadScoreLog")
     .onclick = downloadScoreLog;
+
+ 
+document.getElementById("downloadBestBtn").onclick =
+    downloadBestImages;
+
  
  
     loop();
