@@ -567,8 +567,8 @@ function saveBestMat(name, mat)
 
 function downloadBestImages()
 {
-console.log("Download Best");
-console.log(window.bestImages);
+    
+console.log("Download Best:", Object.keys(window.bestImages));
     
     for (const name in window.bestImages)
     {
