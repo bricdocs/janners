@@ -311,23 +311,31 @@ body{
         object-fit:contain;
     }
 
-    #debugPanel{
-        width:96vw;
+#debugPanel{
 
-        grid-template-columns:repeat(2, minmax(0, 1fr));
+    width:100%;
 
-        gap:5px;
+    display:flex;
 
-        margin:5px auto;
-        padding:4px;
-    }
+    flex-wrap:wrap;
 
-    #debugPanel canvas{
-        width:100%;
-        max-height:22vh;
+    justify-content:center;
 
-        object-fit:contain;
-    }
+    gap:6px;
+
+    margin:5px auto;
+
+    padding:4px;
+}
+
+#debugPanel canvas{
+
+    width:100px;
+
+    height:auto;
+
+    margin:2px;
+}
 
     #buttonPanel{
         width:96vw;
