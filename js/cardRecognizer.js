@@ -264,6 +264,9 @@ DebugImages.suit =
 
 if (window.bestMatch && window.bestMatch.updated)
 {
+
+console.log("BEST UPDATED");    
+    
     saveBestMat("01_roi.png", roi);
     saveBestMat("02_gray.png", gray);
     saveBestMat("03_binary.png", binary);
