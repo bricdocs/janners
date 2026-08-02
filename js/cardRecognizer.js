@@ -573,11 +573,14 @@ function saveBestMat(name, mat)
 
 function downloadBestImages()
 {
-    
-console.log("Download Best:", Object.keys(window.bestImages));
-    
+    console.log("Download Best:", Object.keys(window.bestImages));
+
+    window.DOWNLOAD_NOW = true;
+
     for (const name in window.bestImages)
     {
         saveMat(window.bestImages[name], name);
     }
+
+    window.DOWNLOAD_NOW = false;
 }
