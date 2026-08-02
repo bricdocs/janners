@@ -34,6 +34,7 @@ let scoreStats =
 let debugCapture = false;
 let runtimeSaved = false;
 
+window.DOWNLOAD_NOW = false;
 window.GOOD_SCORE = 70;
 window.BAD_SCORE  = 40;
 window.scoreTag = 0;
