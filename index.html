@@ -15,6 +15,7 @@
 
 <body>
 
+<div id="cameraPanel">    
     <video
         id="video"
         autoplay
@@ -24,21 +25,28 @@
     </video>
 <canvas id="canvas"></canvas>
 
+</div>    
+
+<div id="debugPanel"> 
+    
 <canvas
     id="warpCanvas"
     width="200"
     height="300">
 </canvas>
+    
 <canvas
     id="cornerCanvas"
     width="70"
     height="125">
 </canvas>
+    
 <canvas
     id="grayCanvas"
     width="50"
     height="90">
 </canvas>
+    
 <canvas
     id="binaryCanvas"
     width="65"
@@ -57,6 +65,10 @@
     height="40">
 </canvas>
 
+</div>
+
+<div id="buttonPanel">
+    
 <button onclick="saveDebugImages()">
     Save Debug Images
 </button>
@@ -73,7 +85,7 @@
     Download Best
 </button>
 
-    
+</div>    
     
     
 <!-- OpenCV -->
