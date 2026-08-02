@@ -262,7 +262,7 @@ DebugImages.suit =
 // Best Images Candidate
 //----------------------------------
 
-if (window.bestMatch.updated)
+if (window.bestMatch && window.bestMatch.updated)
 {
     saveBestMat("01_roi.png", roi);
     saveBestMat("02_gray.png", gray);
