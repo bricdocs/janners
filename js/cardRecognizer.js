@@ -527,7 +527,7 @@ link.download = saveName;
 
     console.log("====================================");
 
-    link.click();
+    //link.click();
 }
 
 //----------------------------------
