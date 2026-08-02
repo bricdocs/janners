@@ -290,8 +290,12 @@ document
     .onclick = downloadScoreLog;
 
  
-document.getElementById("downloadBestBtn").onclick =
-    downloadBestImages;
+document.getElementById("downloadBestBtn").onclick = function ()
+{
+    console.log("DOWNLOAD BUTTON CLICK");
+
+    downloadBestImages();
+};
 
  
  
