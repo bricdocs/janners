@@ -59,12 +59,14 @@ console.log(
     roi.empty()
 );
     
-saveMat(roi, "01_roi.png");    
+saveMat(roi, "01_roi.png");
+saveBestMat("01_roi.png", roi);
     
     // 4- Gray
     const gray = new cv.Mat();
     cv.cvtColor(roi, gray, cv.COLOR_RGBA2GRAY);
 saveMat(gray, "02_gray.png");
+saveBestMat("02_gray.png", gray);
     
 cv.imshow("binaryCanvas", gray);
 
@@ -97,6 +99,7 @@ console.log(
 );
     
 saveMat(binary, "03_binary.png");
+saveBestMat("03_binary.png", binary);    
     
 console.log(
     "Binary corner pixels:",
@@ -165,6 +168,7 @@ const rank = binary.roi(rankRect);
 cv.imshow("rankCanvas", rank);
 
 saveMat(rank, "04_rank.png");
+saveBestMat("04_rank.png", rank);
 
 //----------------------------------
 // Contour Debug
