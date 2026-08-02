@@ -330,9 +330,9 @@ body{
 
 #debugPanel canvas{
 
-    width:100px;
+    /* width:100px;
 
-    height:auto;
+    height:auto; */
 
     margin:2px;
 }
