@@ -153,9 +153,27 @@ scoreLog +=
  
 }
 
-
 window.scoreTag = Math.round(rankResult.score * 100);
+ 
+//----------------------------------
+// Best Debug Images
+//----------------------------------
 
+window.bestDebug =
+{
+    roi: null,
+    gray: null,
+    binary: null,
+    rank: null,
+
+    cropInput: null,
+    runtimeMatch: null,
+    templateMatch: null,
+
+    extra: null
+};
+
+ 
 //----------------------------------
 // Best Match Tracker
 //----------------------------------
