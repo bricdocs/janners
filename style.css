@@ -158,3 +158,42 @@ button{
     cursor:pointer;
 
 }
+
+/*=========================================
+  Mobile Layout
+=========================================*/
+
+@media (max-width: 768px)
+{
+
+    #video{
+
+        width:95%;
+        max-height:35vh;
+
+        object-fit:contain;
+
+    }
+
+    canvas{
+
+        width:30%;
+        height:auto;
+
+        margin:3px;
+
+    }
+
+    button{
+
+        width:95%;
+
+        margin:4px auto;
+
+        display:block;
+
+        font-size:15px;
+
+    }
+
+}
