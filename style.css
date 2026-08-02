@@ -309,12 +309,16 @@ body{
         padding:4px;
     }
 
-    #cameraPanel #canvas{
-        width:96vw;
-        max-height:70vh;
+#cameraPanel #canvas{
 
-        object-fit:contain;
-    }
+    width:auto;
+
+    height:auto;
+
+    max-width:none;
+
+    max-height:none;
+}
 
 #debugPanel{
 
