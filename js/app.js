@@ -190,15 +190,16 @@ window.bestDebug =
 
 if (!window.bestMatch)
 {
-    window.bestMatch =
-    {
-        score: -1,
-        name: "",
-        frame: 0,
-        width: 0,
-        height: 0,
-        white: 0
-    };
+   window.bestMatch =
+   {
+    score: -1,
+    name: "",
+    frame: 0,
+    width: 0,
+    height: 0,
+    white: 0,
+    updated: false
+   };
 }
 
 //const whitePixels = cv.countNonZero(rankCrop);
@@ -215,6 +216,8 @@ window.bestMatch.height = cropHeight;
     // window.bestMatch.width  = rankCrop.cols;
     // window.bestMatch.height = rankCrop.rows;
     window.bestMatch.white  = whitePixels;
+
+     window.bestMatch.updated = true;
 
     console.log(
         "NEW BEST >>>",
