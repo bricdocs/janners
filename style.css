@@ -245,10 +245,11 @@ body{
 ----------------------------------*/
 
 #debugPanel{
-    width:min(96vw, 900px);
+    width:max-content;
+    max-width:96vw;
 
     display:grid;
-    grid-template-columns:repeat(6, minmax(0, 1fr));
+    grid-template-columns:repeat(6, 90px);
 
     gap:6px;
 
