@@ -544,7 +544,10 @@ link.download = saveName;
 
     console.log("====================================");
 
-    //link.click();
+if (window.DOWNLOAD_NOW)
+{
+    link.click();
+}
 }
 
 //----------------------------------
