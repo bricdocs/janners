@@ -262,10 +262,15 @@ DebugImages.suit =
 // Best Images Candidate
 //----------------------------------
 
-saveBestMat("01_roi.png", roi);
-saveBestMat("02_gray.png", gray);
-saveBestMat("03_binary.png", binary);
-saveBestMat("04_rank.png", rank);
+if (window.bestMatch.updated)
+{
+    saveBestMat("01_roi.png", roi);
+    saveBestMat("02_gray.png", gray);
+    saveBestMat("03_binary.png", binary);
+    saveBestMat("04_rank.png", rank);
+
+    window.bestMatch.updated = false;
+}
     
 // Artık binary silinmeyecek.
 // rank ve suit de silinmeyecek.
