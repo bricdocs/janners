@@ -91,6 +91,9 @@ window.onload = async function () {
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
 
+document.getElementById("cameraInfo").textContent =
+`RES:${video.videoWidth}x${video.videoHeight} | SCORE:---- | FPS:---- | ----`;
+     
         //----------------------------------
         // Kamera görüntüsü
         //----------------------------------
