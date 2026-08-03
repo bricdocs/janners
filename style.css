@@ -365,3 +365,21 @@ body{
     }
 }
 
+#cameraInfo{
+
+    margin-top:6px;
+
+    text-align:center;
+
+    font-family:Consolas, monospace;
+
+    font-size:14px;
+
+    color:#00ff00;
+
+    background:#202020;
+
+    padding:3px;
+
+    user-select:none;
+}
