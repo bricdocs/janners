@@ -106,3 +106,19 @@ function stopCamera() {
     Camera.ready = false;
 
 }
+
+async function switchCamera() {
+
+    // Mevcut kamerayı kapat
+    stopCamera();
+
+    // Ön / Arka kamera değiştir
+    Camera.facingMode =
+        (Camera.facingMode === "environment")
+            ? "user"
+            : "environment";
+
+    // Yeni kamerayı aç
+    await startCamera();
+
+}
