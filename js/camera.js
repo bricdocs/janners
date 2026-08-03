@@ -7,7 +7,8 @@ const Camera = {
 
     video: null,
     stream: null,
-    ready: false
+    ready: false,
+ facingMode: "environment"
 
 };
 
@@ -27,9 +28,9 @@ async function startCamera() {
 
             video: {
 
-                facingMode: {
-                    ideal: "environment"
-                },
+             facingMode: {
+             ideal: Camera.facingMode
+             },
 
                 width: {
                     ideal: 960
