@@ -32,11 +32,11 @@ async function startCamera() {
                 },
 
                 width: {
-                    ideal: 640
+                    ideal: 1280
                 },
 
                 height: {
-                    ideal: 480
+                    ideal: 720
                 }
 
             },
